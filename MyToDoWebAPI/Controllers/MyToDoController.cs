@@ -20,7 +20,25 @@ namespace MyToDoWebAPI.Controllers
         [HttpGet]
         public IActionResult GetAllItems()
         {
-            return null;
+            return Ok(items);
+        }
+        [HttpGet]
+        [Route("{index}")]
+        public IActionResult GetSpecifiedItems(int index)
+        {
+            if(index < 0 || index > items.Count - 1)
+            {
+                return BadRequest("Invalid Index.");
+            }
+            else
+            {
+                return Ok(items[index]);
+            }
+        }
+        [HttpPost]
+        public IActionResult AddItem([FromBody] string item)
+        {
+
         }
     }
 }
