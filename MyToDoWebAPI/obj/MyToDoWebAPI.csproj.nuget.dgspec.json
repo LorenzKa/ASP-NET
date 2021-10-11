@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Fabian\\Desktop\\MyToDoWebAPI\\MyToDoWebAPI\\MyToDoWebAPI.csproj": {}
+    "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\MyToDoWebAPI\\MyToDoWebAPI\\MyToDoWebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Fabian\\Desktop\\MyToDoWebAPI\\MyToDoWebAPI\\MyToDoWebAPI.csproj": {
+    "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\MyToDoWebAPI\\MyToDoWebAPI\\MyToDoWebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Fabian\\Desktop\\MyToDoWebAPI\\MyToDoWebAPI\\MyToDoWebAPI.csproj",
+        "projectUniqueName": "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\MyToDoWebAPI\\MyToDoWebAPI\\MyToDoWebAPI.csproj",
         "projectName": "MyToDoWebAPI",
-        "projectPath": "C:\\Users\\Fabian\\Desktop\\MyToDoWebAPI\\MyToDoWebAPI\\MyToDoWebAPI.csproj",
-        "packagesPath": "C:\\Users\\Fabian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Fabian\\Desktop\\MyToDoWebAPI\\MyToDoWebAPI\\obj\\",
+        "projectPath": "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\MyToDoWebAPI\\MyToDoWebAPI\\MyToDoWebAPI.csproj",
+        "packagesPath": "C:\\Users\\loren\\.nuget\\packages\\",
+        "outputPath": "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\MyToDoWebAPI\\MyToDoWebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Fabian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\loren\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -63,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
