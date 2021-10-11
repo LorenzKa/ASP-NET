@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\MyToDoWebAPI\\MyToDoWebAPI\\MyToDoWebAPI.csproj": {}
+    "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\mytodowebapi\\MyToDoWebAPI\\MyToDoWebAPI.csproj": {}
   },
   "projects": {
-    "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\MyToDoWebAPI\\MyToDoWebAPI\\MyToDoWebAPI.csproj": {
+    "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\mytodowebapi\\MyToDoWebAPI\\MyToDoWebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\MyToDoWebAPI\\MyToDoWebAPI\\MyToDoWebAPI.csproj",
+        "projectUniqueName": "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\mytodowebapi\\MyToDoWebAPI\\MyToDoWebAPI.csproj",
         "projectName": "MyToDoWebAPI",
-        "projectPath": "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\MyToDoWebAPI\\MyToDoWebAPI\\MyToDoWebAPI.csproj",
+        "projectPath": "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\mytodowebapi\\MyToDoWebAPI\\MyToDoWebAPI.csproj",
         "packagesPath": "C:\\Users\\loren\\.nuget\\packages\\",
-        "outputPath": "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\MyToDoWebAPI\\MyToDoWebAPI\\obj\\",
+        "outputPath": "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\mytodowebapi\\MyToDoWebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\loren\\AppData\\Roaming\\NuGet\\NuGet.Config",

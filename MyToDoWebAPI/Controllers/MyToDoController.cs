@@ -7,72 +7,79 @@ using System.Threading.Tasks;
 
 namespace MyToDoWebAPI.Controllers
 {
-    [Route("api/todo-items")]
+    [Route("contacts")]
     [ApiController]
     public class MyToDoController : ControllerBase
     {
-        private readonly static List<string> items = new List<string>
+        private readonly static List<Contact> contacts = new List<Contact>
         {
-            "Programming",
-            "More Programming",
-            "A lot more Programming"
+            new Contact
+            {
+                Id = 0,
+                FirstName = "Jakob",
+                LastName = "Schlager",
+                Email = "schlager.biz@gmail.com"
+            },
+            new Contact
+            {
+                Id = 1,
+                FirstName = "Lorenz",
+                LastName = "Kassewalder",
+                Email = "kassewalder.biz@gmail.com"
+            },
         };
         [HttpGet]
-        public IActionResult GetAllItems()
+        public IActionResult GetAllContacts()
         {
-            return Ok(items);
+            return Ok(contacts);
         }
-        [HttpGet]
-        [Route("{index}", Name = "GetSpecificItem")]
-        public IActionResult GetSpecificItem(int index)
+        
+        [HttpPost]
+        public IActionResult AddContact([FromBody] ContactDTO contact)
         {
-            if(index < 0 || index > items.Count - 1)
+            
+            Contact toAdd = convertContactDto(contact);
+            if (toAdd.Email != "" && toAdd.FirstName != "" && toAdd.LastName != "")
             {
-                return BadRequest("Invalid Index.");
+                contacts.Add(toAdd);
+                return Ok(contacts[contacts.IndexOf(toAdd)]);
+            }
+            return BadRequest();
+        }
+        [HttpDelete]
+        [Route("{personId}")]
+        public IActionResult DeleteContact(int personId)
+        {
+            
+            if (contacts[personId] != null)
+            {
+                contacts.RemoveAt(personId);
+                return NoContent();
             }
             else
             {
-                return Ok(items[index]);
+                return NotFound();
+            }
+
+        }
+        [HttpGet]
+        [Route("findByName")]
+        public IActionResult FindByName([FromQuery] string name)
+        {
+            name = name.ToLower();
+            List<Contact> filteredContacts = contacts.Where(x => x.LastName.ToLower().Contains(name) || x.FirstName.ToLower().Contains(name)).ToList();
+            if (filteredContacts.Count > 0)
+            {
+                return Ok(filteredContacts);
+            }
+            else
+            {
+                return BadRequest(filteredContacts);
             }
         }
-        [HttpPost]
-        public IActionResult AddItem([FromBody] string item)
+        private Contact convertContactDto(ContactDTO contact)
         {
-            items.Add(item);
-            return CreatedAtRoute("GetSpecificItem", new { index = items.IndexOf(item) }, item);
-        }
-        [HttpDelete]
-        [Route("{index}")]
-        public IActionResult DeleteItem(int index)
-        {
-            if (index < 0 || index > items.Count - 1)
-            {
-                return BadRequest("Invalid Index.");
-            }
-            items.RemoveAt(index);
-            return NoContent();
-        }
-        [HttpPut]
-        [Route("{index}")]
-        public IActionResult UpdateItem(int index,[FromBody] string item)
-        {
-            if (index < 0 || index > items.Count - 1)
-            {
-                return BadRequest("Invalid Index.");
-            }
-            items[index] = item;
-            return Ok();
-        }
-        [HttpGet] // /api/todo-items/sorted?sortOrder=asc
-        [Route("sorted")]
-        public IActionResult GetAllItemsSorted([FromQuery]string sortOrder)
-        {
-            return sortOrder switch
-            {
-                "desc" => Ok(items.OrderByDescending(item => item)),
-                "asc" => Ok(items.OrderBy(item => item)),
-                _ => BadRequest("Invalid or missing sortorder query paramter")
-            };
+            return new Contact { Id = contacts.Count, FirstName = contact.FirstName, LastName = contact.LastName, Email = contact.Email };
         }
     }
 }
