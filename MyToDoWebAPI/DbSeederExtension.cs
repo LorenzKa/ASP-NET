@@ -10,9 +10,8 @@ namespace MyToDoWebAPI
 {
     public static class DbSeederExtension
     {
-        public static void Seed(this ModelBuilder modelBuilder)
+        public static void Seed(ModelBuilder modelBuilder)
         {
-            var list = 
             modelBuilder.Entity<Album>().HasData(
                 File.ReadAllLines(@"CSV/album.csv")
                 .Skip(1)
@@ -34,33 +33,31 @@ namespace MyToDoWebAPI
                 .Select(x => new Playlist() { Id = int.Parse(x[0]), Name = x[1] })
                 .ToList()
                 );
-            modelBuilder.Entity<PlaylistTrack>().HasData(
-                File.ReadAllLines(@"CSV/playlist-track.csv")
-                .Skip(1)
-                .Select(l => l.Replace('"', ' ').Trim().Split(","))
-                .Select(x => new PlaylistTrack() { Id = int.Parse(x[0]), TrackId = int.Parse(x[1]) })
-                .ToList()
-                );
-            var test = File.ReadAllLines(@"CSV/track.csv")
-                .Skip(1)
-                .Select(l => l.Replace(", ", "REPLACEDTOPARSE").Replace('"', ' ').Trim().Split(",")).ToList();
-            File.WriteAllLines("test.csv", test[0]);
             modelBuilder.Entity<Track>().HasData(
                 File.ReadAllLines(@"CSV/track.csv")
                 .Skip(1)
-                .Select(l => l.Replace(", ", "REPLACEDTOPARSE").Replace('"', ' ').Trim().Split(","))
-                .Select(x => new Track() { Id = int.Parse(x[0]),
-                    Name = x[1].Replace("REPLACEDTOPARSE", ""),
-                    AlbumId = int.Parse(x[2]),
-                    MediaTypeId = int.Parse(x[3]),
-                    GenreId = int.Parse(x[4]),
-                    Composer = x[5].Replace("REPLACEDTOPARSE", ""),
-                    Milliseconds = int.Parse(x[6]),
-                    Bytes = int.Parse(x[7]),
-                    UnitPrice = double.Parse(x[8])})
+                .Select(l => l.Split('"' + "," + '"'))
+                .Select(x => new Track() { Id = int.Parse(x[0].Replace('"', ' ').Trim()),
+                    Name = x[1].Replace('"', ' ').Trim(),
+                    AlbumId = int.Parse(x[2].Replace('"', ' ').Trim()),
+                    MediaTypeId = int.Parse(x[3].Replace('"', ' ').Trim()),
+                    GenreId = int.Parse(x[4].Replace('"', ' ').Trim()),
+                    Composer = x[5].Replace('"', ' ').Trim(),
+                    Milliseconds = int.Parse(x[6].Replace('"', ' ').Trim()),
+                    Bytes = int.Parse(x[7].Replace('"', ' ').Trim()),
+                    UnitPrice = double.Parse(x[8].Replace('"', ' ').Trim())
+                })
                 .ToList() 
                 );
-
+            /*modelBuilder.Entity<PlaylistTrack>().HasData(
+               File.ReadAllLines(@"CSV/playlist-track.csv")
+               .Skip(1)
+               .Select(l => l.Replace('"', ' ').Trim().Split(","))
+               .Select(x => new PlaylistTrack() { Id = int.Parse(x[0]), TrackId = int.Parse(x[0])})
+               .ToList()
+               );*/
+            
+            
         }
     }
 }

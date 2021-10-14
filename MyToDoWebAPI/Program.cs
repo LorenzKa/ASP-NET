@@ -14,6 +14,7 @@ namespace MyToDoWebAPI
         public static void Main(string[] args)
         {
             var db = new MusicContext();
+            db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
             db.SaveChanges();
             CreateHostBuilder(args).Build().Run();

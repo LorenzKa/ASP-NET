@@ -12,12 +12,17 @@ namespace MyToDoWebAPI.Controllers
     [ApiController]
     public class MyToDoController : ControllerBase
     {
+        private readonly MusicContext db;
 
-        
+        public MyToDoController(MusicContext db)
+        {
+            this.db = db;
+        }
+
         [HttpGet]
         public IActionResult outputAll()
         {
-            return Ok();
+            return Ok(db.PlaylistTracks.Count());
         }
 
 
