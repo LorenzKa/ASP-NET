@@ -12,12 +12,6 @@ namespace MyToDoWebAPI.Controllers
     [ApiController]
     public class AlbumController : ControllerBase
     {
-        private readonly MusicContext db;
-
-        public AlbumController(MusicContext db)
-        {
-            this.db = db;
-        }
-
+       
     }
 }

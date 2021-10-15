@@ -35,7 +35,7 @@ namespace MyToDoWebAPI.Controllers
         [HttpDelete]
         public IActionResult deleteTrack([FromQuery] int playlistid, [FromQuery] int trackid)
         {
-            db.PlaylistTracks.Remove(db.PlaylistTracks.Where(x => x.PlaylistId == playlistid && x.TrackId == trackid).First());
+            db.PlaylistTracks.Remove(db.PlaylistTracks.Where(x => x.Id == playlistid && x.TrackId == trackid).First());
             db.SaveChanges();
             return Ok();
         }

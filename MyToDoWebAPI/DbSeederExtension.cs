@@ -49,13 +49,13 @@ namespace MyToDoWebAPI
                 })
                 .ToList() 
                 );
-            modelBuilder.Entity<PlaylistTrack>().HasData(
+            /*modelBuilder.Entity<PlaylistTrack>().HasData(
                File.ReadAllLines(@"CSV/playlist-track.csv")
                .Skip(1)
                .Select(l => l.Replace('"', ' ').Trim().Split(","))
                .Select(x => new PlaylistTrack() {PlaylistId = int.Parse(x[0]), TrackId = int.Parse(x[1])})
                .ToList()
-               );
+               );*/
             
             
         }

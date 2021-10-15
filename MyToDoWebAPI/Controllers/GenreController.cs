@@ -18,11 +18,5 @@ namespace MyToDoWebAPI.Controllers
             this.db = db;
         }
 
-        [HttpGet]
-        public IActionResult outputAllGenres()
-        {
-            return Ok(db.Genres.ToList());
-        }
-
     }
 }
