@@ -2,29 +2,21 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MyToDoWebAPI.Controllers
 {
-    [Route("contacts")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class MyToDoController : ControllerBase
+    public class PlaylistTrackController : ControllerBase
     {
         private readonly MusicContext db;
 
-        public MyToDoController(MusicContext db)
+        public PlaylistTrackController(MusicContext db)
         {
             this.db = db;
         }
-
-        [HttpGet]
-        public IActionResult outputAll()
-        {
-            return Ok(db.PlaylistTracks.Count());
-        }
-
 
     }
 }
