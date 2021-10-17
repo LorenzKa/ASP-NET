@@ -20,24 +20,5 @@ namespace MyToDoWebAPI.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult outputTracksForGenre([FromQuery] int genreid)
-        {
-            return Ok(db.Tracks.Where(x => x.GenreId == genreid).ToList());
-        }
-        [HttpPost]
-        public IActionResult addTrack([FromBody] PlaylistTrack playlistTrack)
-        {
-            db.PlaylistTracks.Add(playlistTrack);
-            db.SaveChanges();
-            return Ok();
-        }
-        [HttpDelete]
-        public IActionResult deleteTrack([FromQuery] int playlistid, [FromQuery] int trackid)
-        {
-            db.PlaylistTracks.Remove(db.PlaylistTracks.Where(x => x.Id == playlistid && x.TrackId == trackid).First());
-            db.SaveChanges();
-            return Ok();
-        }
     }
 }

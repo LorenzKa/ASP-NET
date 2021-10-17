@@ -29,7 +29,7 @@ namespace MyToDoWebAPI.Controllers
         [Route("{index}")]
         public IActionResult outputTracksForPlaylists(int index)
         {
-            return Ok(db.PlaylistTracks);
+            return Ok();
         }
     }
 }

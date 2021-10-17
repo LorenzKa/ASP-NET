@@ -15,7 +15,6 @@ namespace MyToDoWebAPI
 {
     public class Startup
     {
-
         private readonly string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
@@ -27,13 +26,12 @@ namespace MyToDoWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MusicContext>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyToDoWebAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PlaylistEditorV2", Version = "v1" });
             });
-
             services.AddCors(options =>
             {
                 options.AddPolicy(myAllowSpecificOrigins, x => x.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
@@ -47,13 +45,11 @@ namespace MyToDoWebAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyToDoWebAPI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PlaylistEditorV2 v1"));
             }
             app.UseCors(myAllowSpecificOrigins);
+
             app.UseRouting();
-            
-
-
 
             app.UseAuthorization();
 
