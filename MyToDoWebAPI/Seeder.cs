@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyToDoWebAPI
 {
-    public class DbSeederExtension
+    public class Seeder
     {
         public List<Album> GetAlbums() {
             return File.ReadAllLines(@"CSV/album.csv")

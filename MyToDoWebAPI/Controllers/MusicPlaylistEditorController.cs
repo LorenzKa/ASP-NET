@@ -12,7 +12,7 @@ namespace MyToDoWebAPI.Controllers
     [ApiController]
     public class MusicPlaylistEditorController : ControllerBase
     {
-        private readonly static DbSeederExtension Seeder = new DbSeederExtension();
+        private readonly static Seeder Seeder = new();
         private readonly static List<Track> tracks = Seeder.GetTracks();
         private readonly static List<Playlist> playlists = Seeder.GetPlaylists();
         private readonly static List<Genre> genres = Seeder.GetGrenes();
