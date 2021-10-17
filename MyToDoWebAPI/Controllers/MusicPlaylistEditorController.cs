@@ -23,51 +23,124 @@ namespace MyToDoWebAPI.Controllers
         [HttpGet]
         public IActionResult outputAllPlaylists()
         {
-            return Ok(playlists);
+            if(playlists.Count > 0)
+            {
+                return Ok(playlists);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
         [Route("playlisttracks/{index}")]
         [HttpGet]
         public IActionResult outputTracksForPlaylists(int index)
         {
-            List<int> trackIdList = playlistTracks.Where(x => x.PlaylistId == index).Select(x => x.TrackId).ToList();
-            List<Track> trackList = new List<Track>();
-            for (int i = 0; i < trackIdList.Count; i++)
+            if (index > 0)
             {
-                trackList.Add(tracks.Where(x => x.Id == trackIdList[i]).First());
+                List<int> trackIdList = playlistTracks.Where(x => x.PlaylistId == index).Select(x => x.TrackId).ToList();
+                if (trackIdList.Count > 0)
+                {
+                    List<Track> trackList = new List<Track>();
+                    for (int i = 0; i < trackIdList.Count; i++)
+                    {
+                        trackList.Add(tracks.Where(x => x.Id == trackIdList[i]).First());
+                    }
+                    return Ok(trackList);
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
-            return Ok(trackList);
+            else
+            {
+                return BadRequest();
+            }
         }
         [Route("genres")]
         [HttpGet]
         public IActionResult outputAllGenres()
         {
-            return Ok(genres);
+            if (genres.Count > 0)
+            {
+                return Ok(genres);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
         [Route("albums")]
         [HttpGet]
         public IActionResult outputAllAlbums()
         {
-            return Ok(albums);
+            if (albums.Count > 0)
+            {
+                return Ok(albums);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
         [Route("tracks")]
         [HttpGet]
         public IActionResult outputTracksForGenre([FromQuery] int genreid)
         {
-            return Ok(tracks.Where(x => x.GenreId == genreid).ToList());
+            if (genreid > 0)
+            {
+                var tracksList =  tracks.Where(x => x.GenreId == genreid).ToList();
+                if(tracksList.Count > 0)
+                {
+                    return Ok(tracksList);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
         [Route("track")]
         [HttpPost]
         public IActionResult addTrack([FromBody] PlaylistTrack playlistTrack)
         {
-            playlistTracks.Add(playlistTrack);
-            return Ok(playlistTracks.Where(x => x ==  playlistTrack).First());
+            if (playlistTrack.PlaylistId > 0 && playlistTrack.TrackId > 0)
+            {
+                if (playlists.Find(x => x.Id == playlistTrack.PlaylistId) != null && tracks.Find(x => x.Id == playlistTrack.TrackId) != null)
+                {
+                    playlistTracks.Add(playlistTrack);
+                    return Ok(playlistTracks.Where(x => x == playlistTrack).First());
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
         [Route("track")]
         [HttpDelete]
         public IActionResult deleteTrack([FromQuery] int playlistid, [FromQuery] int trackid)
         {
-            playlistTracks.Remove(playlistTracks.Where(x => x.PlaylistId == playlistid && x.TrackId == trackid).First());
-            return NoContent();
+            if(playlistid > 0 && trackid > 0)
+            {
+                var toRemove = playlistTracks.Where(x => x.PlaylistId == playlistid && x.TrackId == trackid).First();
+                if (toRemove != null)
+                {
+                    playlistTracks.Remove(playlistTracks.Where(x => x.PlaylistId == playlistid && x.TrackId == trackid).First());
+                    return NoContent();
+                }
+                return NotFound();
+            }
+            return BadRequest();
         }
     }
 }
