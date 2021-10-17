@@ -28,7 +28,7 @@ namespace MyToDoWebAPI
             return File.ReadAllLines(@"CSV/playlist-track.csv")
            .Skip(1)
            .Select(l => l.Replace('"', ' ').Trim().Split(","))
-           .Select(x => new PlaylistTrack() { TrackId = int.Parse(x[0]), PlaylistId = int.Parse(x[1]) })
+           .Select(x => new PlaylistTrack() { PlaylistId = int.Parse(x[0]), TrackId = int.Parse(x[1]) })
            .ToList();
         }
         public List<Track> GetTracks() {
