@@ -4,12 +4,20 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:59058",
+      "applicationUrl": "http://localhost:49642",
       "sslPort": 0
     }
   },
   "profiles": {
-    "ToDoWebApi": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "TournamentApi": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

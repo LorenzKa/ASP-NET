@@ -11,17 +11,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ToDoDatabase;
-using ToDoWebApi.Services;
+using TournamentDb;
 
-namespace ToDoWebApi
+namespace TournamentApi
 {
     public class Startup
     {
-        private readonly static string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
         public Startup(IConfiguration configuration)
-        {
+        {;
+
             Configuration = configuration;
         }
 
@@ -30,20 +28,12 @@ namespace ToDoWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ToDoDbContext>(options => options.UseSqlite(Configuration["ConnectionStrings:DefaultConnection"]));
-            services.AddScoped<ToDoService>();
+            services.AddDbContext<TournamentContext>(options => options.UseSqlite(Configuration["ConnectionStrings:DefaultConnection"])))
+            services.AddScoped<TournamentService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ToDoWebApi", Version = "v1" });
-            });
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy(myAllowSpecificOrigins,
-                    x => x.AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowAnyOrigin());
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TournamentApi", Version = "v1" });
             });
         }
 
@@ -54,10 +44,8 @@ namespace ToDoWebApi
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ToDoWebApi v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TournamentApi v1"));
             }
-
-            app.UseCors(myAllowSpecificOrigins);
 
             app.UseRouting();
 
