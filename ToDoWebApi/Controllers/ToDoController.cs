@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ToDoWebApi.Services;
 
 namespace ToDoWebApi.Controllers
 {
@@ -17,7 +18,18 @@ namespace ToDoWebApi.Controllers
             "Für PLF lernen",
             "Katze füttern"
         };
+        private readonly ToDoService db;
+        public ToDoController(ToDoService toDoService)
+        {
+            db = toDoService;
+        }
 
+        [HttpGet]
+        [Route("persons")]
+        public IActionResult GetAllPersons()
+        {
+            return Ok(db.GetAllPersons());
+        }
         [HttpGet]
         public IActionResult GetAllItems()
         {
