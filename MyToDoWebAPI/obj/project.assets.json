@@ -193,19 +193,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\loren\\.nuget\\packages\\": {}
+    "C:\\Users\\loren\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\MyToDoWebAPI\\MyToDoWebAPI\\MyToDoWebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\loren\\OneDrive\\Schule\\5_Klasse\\POS\\ASP-NET\\MyToDoWebAPI\\MyToDoWebAPI.csproj",
       "projectName": "MyToDoWebAPI",
-      "projectPath": "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\MyToDoWebAPI\\MyToDoWebAPI\\MyToDoWebAPI.csproj",
+      "projectPath": "C:\\Users\\loren\\OneDrive\\Schule\\5_Klasse\\POS\\ASP-NET\\MyToDoWebAPI\\MyToDoWebAPI.csproj",
       "packagesPath": "C:\\Users\\loren\\.nuget\\packages\\",
-      "outputPath": "C:\\OneDrive\\Schule\\5_Klasse\\POS\\ASP.NET\\new\\MyToDoWebAPI\\MyToDoWebAPI\\obj\\",
+      "outputPath": "C:\\Users\\loren\\OneDrive\\Schule\\5_Klasse\\POS\\ASP-NET\\MyToDoWebAPI\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\loren\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -254,7 +259,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
