@@ -12,14 +12,20 @@ namespace TournamentDb
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Player>().HasData(File.ReadAllLines("./assets/players.csv")
+            List<Player> players = File.ReadAllLines("./assets/players.csv")
                 .Skip(1)
                 .Select(x => x.Split(","))
                 .Select(x => new Player()
                 {
                     Lastname = x[1],
                     Gender = x[2]
-                }).ToList());
+                }).ToList();
+            for (int i = 0; i < players.Count; i++)
+            {
+                players[i].Id = i + 1;
+                modelBuilder.Entity<Player>().HasData(players[i]);
+            }
+            
 
         }
     }

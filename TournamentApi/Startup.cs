@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TournamentApi.Services;
 using TournamentDb;
 
 namespace TournamentApi
@@ -18,8 +19,10 @@ namespace TournamentApi
     public class Startup
     {
         public Startup(IConfiguration configuration)
-        {;
-
+        {
+            var db = new TournamentContext();
+            db.Database.EnsureDeleted();
+            db.Database.EnsureCreated();
             Configuration = configuration;
         }
 
@@ -28,8 +31,9 @@ namespace TournamentApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TournamentContext>(options => options.UseSqlite(Configuration["ConnectionStrings:DefaultConnection"])))
-            services.AddScoped<TournamentService>();
+            services.AddDbContext<TournamentContext>(options => options.UseSqlite(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddScoped<PlayerService>();
+            services.AddScoped<MatchService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
