@@ -18,7 +18,7 @@ namespace TournamentApi
 {
     public class Startup
     {
-        private readonly static string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private readonly string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -58,12 +58,15 @@ namespace TournamentApi
 
             app.UseRouting();
 
+            app.UseCors(myAllowSpecificOrigins);
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+            
         }
     }
 }
