@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TournamentApi.Services;
+using TournamentDb.DTO;
 
 namespace TournamentApi.Controllers
 {
@@ -12,21 +13,24 @@ namespace TournamentApi.Controllers
     [ApiController]
     public class MatchController : ControllerBase
     {
-        private readonly MatchService db;
+        private readonly MatchService _service;
 
-        public MatchController(MatchService db)
+        public MatchController(MatchService service)
         {
-            this.db = db;
+            this._service = service;
         }
 
         [HttpGet]
-        public IActionResult generateRound()
+        public IActionResult GenerateRound()
         {
-            return Ok(db.GenerateMatches());
+            return Ok(_service.GenerateMatches());
         }
         
         [HttpPost]
-        public IActionResult setWinner()
+        public IActionResult SetWinner([FromBody] SetWinnerDto winnerDto)
+        {
+            return Ok(_service.SetWinner(winnerDto));
+        }
 
     }
 }

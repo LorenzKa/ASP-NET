@@ -3,16 +3,20 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace TournamentDb
 {
     public class TournamentContext : DbContext
     {
-        public TournamentContext(DbContextOptions<TournamentContext> options) : base(options){}
-
         public TournamentContext()
+        {
+        }
+
+        public TournamentContext(DbContextOptions<TournamentContext> options) : base(options)
         {
         }
 
@@ -31,7 +35,20 @@ namespace TournamentDb
                 var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
                 optionsBuilder.UseSqlite(configuration["ConnectionStrings:DefaultConnection"]);
             }
+
             base.OnConfiguring(optionsBuilder);
+        }
+        
+    }
+
+    public class TournamentContextFactory : IDesignTimeDbContextFactory<TournamentContext>
+    {
+        public TournamentContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<TournamentContext>();
+            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            optionsBuilder.UseSqlite(configuration["ConnectionStrings:DefaultConnection"]);
+            return new TournamentContext(optionsBuilder.Options);
         }
     }
 }

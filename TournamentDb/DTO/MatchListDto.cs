@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace TournamentDb.DTO
 {
-    public class PlayerDTO
+    public class MatchListDto
     {
-        public int Id;
-        public string name;
-        public string gender;
+        public int RoundNumber { get; set; }
+        public List<MatchDto> Matches { get; set; }
     }
 }

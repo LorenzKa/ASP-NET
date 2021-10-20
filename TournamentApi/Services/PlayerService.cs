@@ -10,14 +10,14 @@ namespace TournamentApi.Services
 {
     public class PlayerService
     {
-        private readonly TournamentContext db;
+        private readonly TournamentContext _db;
         public PlayerService(TournamentContext db)
         {
-            this.db = db;
+            this._db = db;
         }
         public List<Player> GetPlayers()
         {
-            return db.Players.ToList();
+            return _db.Players.ToList();
         }
     }
 }

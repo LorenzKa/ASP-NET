@@ -12,16 +12,16 @@ namespace TournamentApi.Controllers
     [ApiController]
     public class PlayerController : ControllerBase
     {
-        private readonly PlayerService db;
+        private readonly PlayerService _service;
 
-        public PlayerController(PlayerService db)
+        public PlayerController(PlayerService service)
         {
-            this.db = db;
+            this._service = service;
         }
         [HttpGet]
         public IActionResult GetPlayers()
         {
-            return Ok(db.GetPlayers());
+            return Ok(_service.GetPlayers());
         }
     }
 }

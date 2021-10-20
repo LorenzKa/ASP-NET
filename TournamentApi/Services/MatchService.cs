@@ -5,32 +5,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TournamentDb;
+using TournamentDb.DTO;
 
 namespace TournamentApi.Services
 {
     public class MatchService
     {
-        private readonly TournamentContext db;
+        private readonly TournamentContext _db;
         public MatchService(TournamentContext db)
         {
-            this.db = db;
+            this._db = db;
 
         }
-        public Match SetWinner(int MatchId, int PlayerId)
+        public Match SetWinner(SetWinnerDto winnerDto)
         {
-            Match match = db.Matches.Where(x => x.Id == MatchId).First();
+            Match match = _db.Matches.First(x => x.Id == winnerDto.MatchId);
             if (match != null)
             {
-                if (PlayerId == match.Player1.Id)
+                if (winnerDto.PlayerId == match.Player1.Id)
                 {
                     match.Winner = 1;
-                    db.SaveChanges();
+                    _db.SaveChanges();
                     return match;
                 }
-                else if (PlayerId == match.Player2.Id)
+                else if (winnerDto.PlayerId == match.Player2.Id)
                 {
                     match.Winner = 2;
-                    db.SaveChanges();
+                    _db.SaveChanges();
                     return match;
                 }
                 else
@@ -45,15 +46,15 @@ namespace TournamentApi.Services
         }
         public List<Match> GenerateMatches()
         {
-            int playerCount = db.Players.ToList().Count / 2;
+            int playerCount = _db.Players.ToList().Count / 2;
             playerCount = playerCount * 2;
-            var matchCount = db.Matches.ToList().Count;
+            var matchCount = _db.Matches.ToList().Count;
             var rand = new Random();
-            Console.WriteLine(db.Matches.ToList().Count);
-            if (db.Matches.ToList().Count <= 0)
+            Console.WriteLine(_db.Matches.ToList().Count);
+            if (_db.Matches.ToList().Count <= 0)
             {
                 List<Match> matches = new List<Match>();
-                List<Player> availablePlayers = db.Players.ToList();
+                List<Player> availablePlayers = _db.Players.ToList();
                 while (availablePlayers.Count > 0)
                 {
                     var player1 = availablePlayers[rand.Next(availablePlayers.Count)];
@@ -62,15 +63,15 @@ namespace TournamentApi.Services
                     availablePlayers.Remove(player2);
                     matches.Add(new Match { Player1 = player1, Player2 = player2, RoundNumber = 1 });
                 }
-                db.Matches.AddRange(matches);
-                db.SaveChanges();
+                _db.Matches.AddRange(matches);
+                _db.SaveChanges();
                 return matches;
             }
             else
             {
                 List<Player> availablePlayers = new List<Player>();
-                int roundNumber = db.Matches.OrderBy(x => x.RoundNumber).Last().RoundNumber;
-                db.Matches.Where(x => x.RoundNumber == roundNumber).ToList().ForEach(x =>
+                int roundNumber = _db.Matches.OrderBy(x => x.RoundNumber).Last().RoundNumber;
+                _db.Matches.Where(x => x.RoundNumber == roundNumber).ToList().ForEach(x =>
                 {
                     if (x.Winner == 1)
                     {
@@ -97,8 +98,8 @@ namespace TournamentApi.Services
                         availablePlayers.Remove(player2);
                         matches.Add(new Match { Player1 = player1, Player2 = player2, RoundNumber = roundNumber+1 });
                     }
-                    db.Matches.AddRange(matches);
-                    db.SaveChanges();
+                    _db.Matches.AddRange(matches);
+                    _db.SaveChanges();
                     return matches;
                 }
                 else

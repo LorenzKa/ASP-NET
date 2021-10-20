@@ -18,11 +18,9 @@ namespace TournamentApi
 {
     public class Startup
     {
+        private readonly static string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
-            var db = new TournamentContext();
-            db.Database.EnsureDeleted();
-            db.Database.EnsureCreated();
             Configuration = configuration;
         }
 
@@ -38,6 +36,13 @@ namespace TournamentApi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TournamentApi", Version = "v1" });
+            });
+            services.AddCors(options =>
+            {
+                options.AddPolicy(myAllowSpecificOrigins,
+                    x => x.AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowAnyOrigin());
             });
         }
 
