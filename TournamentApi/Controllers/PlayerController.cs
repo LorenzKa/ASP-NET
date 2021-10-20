@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TournamentApi.Services;
+using TournamentDb;
+using TournamentDb.DTO;
 
 namespace TournamentApi.Controllers
 {
@@ -21,7 +23,18 @@ namespace TournamentApi.Controllers
         [HttpGet]
         public IActionResult GetPlayers()
         {
-            return Ok(_service.GetPlayers());
+            return Ok(convertPlayersToDto(_service.GetPlayers()));
+        }
+        private List<PlayerDto> convertPlayersToDto(List<Player> players)
+        {
+            List<PlayerDto> dtoPlayers = new List<PlayerDto>();
+            players.ForEach(x => dtoPlayers.Add(new PlayerDto
+            {
+                Id = x.Id,
+                Name = $"{x.Firstname} {x.Lastname}",
+                Gender = x.Gender
+            }));
+            return dtoPlayers;
         }
     }
 }

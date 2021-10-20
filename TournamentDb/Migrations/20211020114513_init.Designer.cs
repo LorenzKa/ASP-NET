@@ -9,7 +9,7 @@ using TournamentDb;
 namespace TournamentDb.Migrations
 {
     [DbContext(typeof(TournamentContext))]
-    [Migration("20211020124623_init")]
+    [Migration("20211020114513_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

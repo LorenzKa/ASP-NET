@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Design;
+using TournamentDb.Extensions;
 
 namespace TournamentDb
 {

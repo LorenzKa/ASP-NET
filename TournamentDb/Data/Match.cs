@@ -16,7 +16,11 @@ namespace TournamentDb
         [Range(1,5)]
         public int RoundNumber { get; set; }
         [Required]
+        public int Player1Id { get; set; }
+        [Required]
         public Player Player1 { get; set; }
+        [Required]
+        public int Player2Id { get; set; }
         [Required]
         public Player Player2 { get; set; }
         [Range(1,2)]

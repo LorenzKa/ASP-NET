@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,22 +18,22 @@ namespace TournamentApi.Services
             this._db = db;
 
         }
-        public Match SetWinner(SetWinnerDto winnerDto)
+        public Match SetWinner(MatchWinnerDto winnerDto)
         {
-            Match match = _db.Matches.First(x => x.Id == winnerDto.MatchId);
+            Match match = _db.Matches.Where(x => x.Id == winnerDto.MatchId).FirstOrDefault();
             if (match != null)
             {
-                if (winnerDto.PlayerId == match.Player1.Id)
+                if (winnerDto.PlayerId == match.Player1Id)
                 {
                     match.Winner = 1;
                     _db.SaveChanges();
-                    return match;
+                    return _db.Matches.First(x => x.Id == winnerDto.MatchId);
                 }
-                else if (winnerDto.PlayerId == match.Player2.Id)
+                else if (winnerDto.PlayerId == match.Player2Id)
                 {
                     match.Winner = 2;
                     _db.SaveChanges();
-                    return match;
+                    return _db.Matches.First(x => x.Id == winnerDto.MatchId);
                 }
                 else
                 {
@@ -46,8 +47,6 @@ namespace TournamentApi.Services
         }
         public List<Match> GenerateMatches()
         {
-            int playerCount = _db.Players.ToList().Count / 2;
-            playerCount = playerCount * 2;
             var matchCount = _db.Matches.ToList().Count;
             var rand = new Random();
             Console.WriteLine(_db.Matches.ToList().Count);
@@ -55,7 +54,7 @@ namespace TournamentApi.Services
             {
                 List<Match> matches = new List<Match>();
                 List<Player> availablePlayers = _db.Players.ToList();
-                while (availablePlayers.Count > 0)
+                while (availablePlayers.Count > 1)
                 {
                     var player1 = availablePlayers[rand.Next(availablePlayers.Count)];
                     availablePlayers.Remove(player1);
@@ -67,8 +66,9 @@ namespace TournamentApi.Services
                 _db.SaveChanges();
                 return matches;
             }
-            else
+            else if (_db.Matches.Where(x => x.Winner == null).Any() == false)
             {
+                Console.WriteLine("Get in here");
                 List<Player> availablePlayers = new List<Player>();
                 int roundNumber = _db.Matches.OrderBy(x => x.RoundNumber).Last().RoundNumber;
                 _db.Matches.Where(x => x.RoundNumber == roundNumber).ToList().ForEach(x =>
@@ -81,13 +81,10 @@ namespace TournamentApi.Services
                     {
                         availablePlayers.Add(x.Player2);
                     }
-                    else
-                    {
-                        throw new IndexOutOfRangeException();
-                    }
                 });
                 if (matchCount % 2 == 0 && availablePlayers.Count < 1)
                 {
+                    Console.WriteLine("Get in here");
                     List<Match> matches = new List<Match>();
 
                     while (availablePlayers.Count > 0)
@@ -96,7 +93,7 @@ namespace TournamentApi.Services
                         availablePlayers.Remove(player1);
                         var player2 = availablePlayers[rand.Next(availablePlayers.Count)];
                         availablePlayers.Remove(player2);
-                        matches.Add(new Match { Player1 = player1, Player2 = player2, RoundNumber = roundNumber+1 });
+                        matches.Add(new Match { Player1 = player1, Player2 = player2, RoundNumber = roundNumber + 1 });
                     }
                     _db.Matches.AddRange(matches);
                     _db.SaveChanges();
@@ -104,9 +101,27 @@ namespace TournamentApi.Services
                 }
                 else
                 {
-                    throw new Exception();
+                    throw new IndexOutOfRangeException();
                 }
             }
+            else
+            {
+                Console.WriteLine("Throw ApplicationException");
+                throw new ApplicationException();
+            }
+
         }
+        public List<Match> returnWithoutWinner()
+        {
+            return _db.Matches.Include(x => x.Player1).Include(x => x.Player2).Where(x => x.Winner == null).ToList();
+        }
+        public void DeleteAll()
+        {
+            _db.Matches.RemoveRange(_db.Matches);
+            _db.SaveChanges();
+            
+        }
+
+
     }
 }

@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TournamentDb
+namespace TournamentDb.Extensions
 {
     public static class DbSeederExtension
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            List<Player> players = File.ReadAllLines("./assets/players.csv")
+            List<Player> players = File.ReadAllLines("../TournamentDb/assets/players.csv")
                 .Skip(1)
                 .Select(x => x.Split(","))
                 .Select(x => new Player()
