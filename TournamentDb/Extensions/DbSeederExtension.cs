@@ -17,6 +17,7 @@ namespace TournamentDb
                 .Select(x => x.Split(","))
                 .Select(x => new Player()
                 {
+                    Firstname = x[0],
                     Lastname = x[1],
                     Gender = x[2]
                 }).ToList();

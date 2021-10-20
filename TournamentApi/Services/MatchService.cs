@@ -16,6 +16,33 @@ namespace TournamentApi.Services
             this.db = db;
 
         }
+        public Match SetWinner(int MatchId, int PlayerId)
+        {
+            Match match = db.Matches.Where(x => x.Id == MatchId).First();
+            if (match != null)
+            {
+                if (PlayerId == match.Player1.Id)
+                {
+                    match.Winner = 1;
+                    db.SaveChanges();
+                    return match;
+                }
+                else if (PlayerId == match.Player2.Id)
+                {
+                    match.Winner = 2;
+                    db.SaveChanges();
+                    return match;
+                }
+                else
+                {
+                    throw new IndexOutOfRangeException();
+                }
+            }
+            else
+            {
+                throw new ArgumentNullException();
+            }
+        }
         public List<Match> GenerateMatches()
         {
             int playerCount = db.Players.ToList().Count / 2;

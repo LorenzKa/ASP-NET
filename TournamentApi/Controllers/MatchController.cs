@@ -24,5 +24,9 @@ namespace TournamentApi.Controllers
         {
             return Ok(db.GenerateMatches());
         }
+        
+        [HttpPost]
+        public IActionResult setWinner()
+
     }
 }
