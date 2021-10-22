@@ -38,6 +38,10 @@ namespace TournamentApi.Controllers
             {
                 return BadRequest("Match numbers is not correct. Delete current tournament");
             }
+            catch (AggregateException)
+            {
+                return BadRequest("Number of Players is not correct");
+            }
         }
         [HttpPost]
         public IActionResult SetWinner([FromBody] MatchWinnerDto winnerDto)

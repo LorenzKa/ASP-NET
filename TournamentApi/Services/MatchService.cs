@@ -48,17 +48,21 @@ namespace TournamentApi.Services
             {
                 List<Match> matches = new List<Match>();
                 List<Player> availablePlayers = _db.Players.ToList();
-                while (availablePlayers.Count > 1)
+                if (IsPowerOfTwo(availablePlayers.Count) == true)
                 {
-                    var player1 = availablePlayers[rand.Next(availablePlayers.Count)];
-                    availablePlayers.Remove(player1);
-                    var player2 = availablePlayers[rand.Next(availablePlayers.Count)];
-                    availablePlayers.Remove(player2);
-                    matches.Add(new Match { Player1 = player1, Player2 = player2, RoundNumber = 1 });
+                    while (availablePlayers.Count > 1)
+                    {
+                        var player1 = availablePlayers[rand.Next(availablePlayers.Count)];
+                        availablePlayers.Remove(player1);
+                        var player2 = availablePlayers[rand.Next(availablePlayers.Count)];
+                        availablePlayers.Remove(player2);
+                        matches.Add(new Match { Player1 = player1, Player2 = player2, RoundNumber = 1 });
+                    }
+                    _db.Matches.AddRange(matches);
+                    _db.SaveChanges();
+                    return matches;
                 }
-                _db.Matches.AddRange(matches);
-                _db.SaveChanges();
-                return matches;
+                throw new AggregateException();
             }
             else if (_db.Matches.Where(x => x.RoundNumber == _db.Matches.OrderBy(x => x.RoundNumber).Last().RoundNumber).ToList().Count == 1)
             {
@@ -127,6 +131,10 @@ namespace TournamentApi.Services
             _db.Matches.RemoveRange(_db.Matches);
             _db.SaveChanges();
 
+        }
+        private bool IsPowerOfTwo(int x)
+        {
+            return (x != 0) && ((x & (x - 1)) == 0);
         }
 
 
