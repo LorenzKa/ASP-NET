@@ -29,21 +29,15 @@ namespace TournamentApi.Services
                     _db.SaveChanges();
                     return _db.Matches.First(x => x.Id == winnerDto.MatchId);
                 }
-                else if (winnerDto.PlayerId == match.Player2Id)
+                if (winnerDto.PlayerId == match.Player2Id)
                 {
                     match.Winner = 2;
                     _db.SaveChanges();
                     return _db.Matches.First(x => x.Id == winnerDto.MatchId);
                 }
-                else
-                {
-                    throw new IndexOutOfRangeException();
-                }
+                throw new IndexOutOfRangeException();
             }
-            else
-            {
-                throw new ArgumentNullException();
-            }
+            throw new ArgumentNullException();
         }
         public List<Match> GenerateMatches()
         {
@@ -66,23 +60,25 @@ namespace TournamentApi.Services
                 _db.SaveChanges();
                 return matches;
             }
+            else if (_db.Matches.Where(x => x.RoundNumber == _db.Matches.OrderBy(x => x.RoundNumber).Last().RoundNumber).ToList().Count == 1)
+            {
+                Console.WriteLine("Shouldnt be here because only 1 match remaining");
+
+                throw new IndexOutOfRangeException();
+            }
             else if (_db.Matches.Where(x => x.Winner == null).Any() == false)
             {
-                Console.WriteLine("Get in here");
                 List<Player> availablePlayers = new List<Player>();
                 int roundNumber = _db.Matches.OrderBy(x => x.RoundNumber).Last().RoundNumber;
-                _db.Matches.Where(x => x.RoundNumber == roundNumber).ToList().ForEach(x =>
-                {
-                    if (x.Winner == 1)
-                    {
-                        availablePlayers.Add(x.Player1);
-                    }
-                    else if (x.Winner == 2)
-                    {
-                        availablePlayers.Add(x.Player2);
-                    }
-                });
-                if (matchCount % 2 == 0 && availablePlayers.Count < 1)
+                _db.Matches
+                    .Where(x => x.RoundNumber == roundNumber)
+                    .Include(x => x.Player1).Include(x => x.Player2)
+                    .ToList()
+                    .ForEach(x =>
+                        availablePlayers.Add(x.Winner == 1 ? x.Player1 : x.Player2)
+                     );
+                Console.WriteLine(availablePlayers[1].Firstname);
+                if (matchCount % 2 == 0 && availablePlayers.Count > 1)
                 {
                     Console.WriteLine("Get in here");
                     List<Match> matches = new List<Match>();
@@ -111,6 +107,17 @@ namespace TournamentApi.Services
             }
 
         }
+
+        public List<Match> returnCurrentRound()
+        {
+            return _db.Matches.Include(x => x.Player1).Include(x => x.Player2).Where(x => x.RoundNumber == _db.Matches.OrderBy(x => x.RoundNumber).Last().RoundNumber).ToList();
+        }
+
+        public List<Match> AllMatches()
+        {
+            return _db.Matches.ToList();
+        }
+
         public List<Match> returnWithoutWinner()
         {
             return _db.Matches.Include(x => x.Player1).Include(x => x.Player2).Where(x => x.Winner == null).ToList();
@@ -119,7 +126,7 @@ namespace TournamentApi.Services
         {
             _db.Matches.RemoveRange(_db.Matches);
             _db.SaveChanges();
-            
+
         }
 
 

@@ -44,7 +44,12 @@ namespace TournamentApi.Controllers
         {
             try
             {
-                return Ok(new MatchWinnerResponse().CopyPropertiesFrom(_service.SetWinner(winnerDto)));
+                var response = _service.SetWinner(winnerDto);
+                return Ok(new MatchWinnerResponse()
+                {
+                    MatchId = response.Id,
+                    Winner= (int)response.Winner
+                });;
             }
             catch(IndexOutOfRangeException)
             {
@@ -59,7 +64,34 @@ namespace TournamentApi.Controllers
         [Route("WihoutWinner")]
         public IActionResult getWithoutWinner()
         {
-            return Ok(ConvertMatchesToDto(_service.returnWithoutWinner()));
+            List<Match> matches = _service.returnWithoutWinner();
+            if (matches.Count == 0)
+            {
+                return Ok(matches);
+            }
+            else
+            {
+                return Ok(ConvertMatchesToDto(matches));
+            }
+        }
+        [HttpGet]
+        [Route("CurrentRound")]
+        public IActionResult getCurrentRound()
+        {
+            List<Match> matches = _service.returnCurrentRound();
+            if (matches.Count == 0)
+            {
+                return Ok(matches);
+            }
+            else
+            {
+                return Ok(ConvertMatchesToDto(matches));
+            }
+        }
+        [HttpGet]
+        public IActionResult getAllMatches()
+        {
+            return Ok(_service.AllMatches());
         }
         [HttpDelete]
         public IActionResult DeleteAll()
@@ -75,6 +107,7 @@ namespace TournamentApi.Controllers
             matches.ForEach(x => dto.Matches.Add(new MatchDto
             {
                 Id = x.Id,
+                Winner = x.Winner,
                 Player1 = new PlayerDto
                 {
                     Id = x.Player1.Id,
