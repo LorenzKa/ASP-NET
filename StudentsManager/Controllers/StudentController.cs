@@ -27,12 +27,16 @@ namespace StudentsManager.Controllers
             db.Students.ToList().ForEach(x => students.Add(new StudentDto().CopyPropertiesFrom(x)));
             return Ok(students);
         }
-        [HttpPut ("SetClass")]
-        public IActionResult SetClass([FromQuery(Name = "id")] int id, [FromQuery(Name = "classId")] int classId)
-        {
-            db.Students.Where(x => x.Id == id).First().ClazzId = classId;
+        [HttpPut ("SetStudent")]
+        public IActionResult SetClass([FromBody] StudentDto data) {
+            Console.WriteLine(data.Age);
+            var s = db.Students.Where(x => x.Id == data.Id).First();
+            s.Age = data.Age;
+            s.Registered = data.Registered == true ? 1 : 0;
+            s.ClazzId = data.ClazzId;
+            s.Clazz = db.Clazzs.Where(x => x.Id == data.ClazzId).First();
             db.SaveChanges();
-            return Ok(new StudentDto().CopyPropertiesFrom(db.Students.Where(x => id == x.Id).First()));
+            return Ok();
         }
         [HttpPut("SetAge")]
         public IActionResult SetAge([FromQuery(Name = "id")]int id, [FromQuery(Name = "age")] int age)

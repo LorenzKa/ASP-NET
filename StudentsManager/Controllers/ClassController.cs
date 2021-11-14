@@ -30,18 +30,21 @@ namespace StudentsManager.Controllers
         public IActionResult GetStundentsFromClass(int classId)
         {
             var students = new List<StudentDto>();
+            var classList = new List<ClazzDto>();
+            db.Clazzs.Where(y => y.Id != classId).ToList().ForEach(x => classList.Add(new ClazzDto().CopyPropertiesFrom(x)));
             db.Students.Where(x => x.ClazzId == classId).ToList().ForEach(x => students.Add(new StudentDto()
             {
                 Id = x.Id,
-                Name = x.Firstname + x.Lastname,
+                Name = x.Firstname + " "+ x.Lastname,
                 Age = x.Age,
                 ClazzId = x.ClazzId,
                 Country = x.Country,
                 Email = x.Email,
                 Gender = x.Gender,
-                Registered = x.Registered
+                Registered = x.Registered == 1 ? true : false,
+                availableClazzes = classList
             }));
-            return Ok();
+            return Ok(students);
         }
     }
 }

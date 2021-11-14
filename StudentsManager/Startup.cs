@@ -33,7 +33,7 @@ namespace StudentsManager
 
     public void ConfigureServices(IServiceCollection services)
     {
-      var builder = new SqliteConnectionStringBuilder(@"Data Source=C:\Users\loren\Downloads\createWebApiProject\Students.sqlite");
+      var builder = new SqliteConnectionStringBuilder(@"Data Source=C:\OneDrive\Schule\5_Klasse\POS\ASP.NET\StudentsManagerDb\Students.sqlite");
       var location = System.Reflection.Assembly.GetEntryAssembly().Location;
       string dataDirectory = System.IO.Path.GetDirectoryName(location);
       builder.DataSource = System.IO.Path.Combine(dataDirectory, builder.DataSource);

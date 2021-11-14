@@ -13,8 +13,9 @@ namespace StudentsManagerDb.Dto
         public string Email { get; set; }
         public string Country { get; set; }
         public long Age { get; set; }
-        public long Registered { get; set; }
+        public bool Registered { get; set; }
         public long? ClazzId { get; set; }
+        public List<ClazzDto> availableClazzes { get; set; }
 
     }
 }
