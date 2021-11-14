@@ -36,7 +36,7 @@ namespace StudentsManager.Controllers
             s.ClazzId = data.ClazzId;
             s.Clazz = db.Clazzs.Where(x => x.Id == data.ClazzId).First();
             db.SaveChanges();
-            return Ok();
+            return Ok(s);
         }
         [HttpPut("SetAge")]
         public IActionResult SetAge([FromQuery(Name = "id")]int id, [FromQuery(Name = "age")] int age)
