@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindManager", "NorthwindManager\NorthwindManager.csproj", "{E1C2A438-3EB1-469D-91BA-41A40275B273}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindManager", "NorthwindManager\NorthwindManager.csproj", "{F949BF83-1A67-4E1D-88E5-6C1FF16E7E39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindManagerDb", "NorthwindManagerDb\NorthwindManagerDb.csproj", "{99D4B51E-03B0-44A1-A601-7B505BE8826A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindManagerDb", "NorthwindManagerDb\NorthwindManagerDb.csproj", "{E4924874-3558-42D5-AC12-A9064BBA94F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +16,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E1C2A438-3EB1-469D-91BA-41A40275B273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1C2A438-3EB1-469D-91BA-41A40275B273}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1C2A438-3EB1-469D-91BA-41A40275B273}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1C2A438-3EB1-469D-91BA-41A40275B273}.Release|Any CPU.Build.0 = Release|Any CPU
-		{99D4B51E-03B0-44A1-A601-7B505BE8826A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99D4B51E-03B0-44A1-A601-7B505BE8826A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99D4B51E-03B0-44A1-A601-7B505BE8826A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99D4B51E-03B0-44A1-A601-7B505BE8826A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F949BF83-1A67-4E1D-88E5-6C1FF16E7E39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F949BF83-1A67-4E1D-88E5-6C1FF16E7E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F949BF83-1A67-4E1D-88E5-6C1FF16E7E39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F949BF83-1A67-4E1D-88E5-6C1FF16E7E39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4924874-3558-42D5-AC12-A9064BBA94F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4924874-3558-42D5-AC12-A9064BBA94F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4924874-3558-42D5-AC12-A9064BBA94F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4924874-3558-42D5-AC12-A9064BBA94F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
