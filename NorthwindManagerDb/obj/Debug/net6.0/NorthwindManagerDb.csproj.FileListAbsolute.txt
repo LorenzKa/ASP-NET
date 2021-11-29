@@ -1,0 +1,14 @@
+C:\OneDrive\Schule\5_Klasse\POS_SYNCED\createWebApiProject net6\NorthwindManager\NorthwindManagerDb\bin\Debug\net6.0\NorthwindManagerDb.deps.json
+C:\OneDrive\Schule\5_Klasse\POS_SYNCED\createWebApiProject net6\NorthwindManager\NorthwindManagerDb\bin\Debug\net6.0\NorthwindManagerDb.runtimeconfig.json
+C:\OneDrive\Schule\5_Klasse\POS_SYNCED\createWebApiProject net6\NorthwindManager\NorthwindManagerDb\bin\Debug\net6.0\NorthwindManagerDb.dll
+C:\OneDrive\Schule\5_Klasse\POS_SYNCED\createWebApiProject net6\NorthwindManager\NorthwindManagerDb\bin\Debug\net6.0\ref\NorthwindManagerDb.dll
+C:\OneDrive\Schule\5_Klasse\POS_SYNCED\createWebApiProject net6\NorthwindManager\NorthwindManagerDb\bin\Debug\net6.0\NorthwindManagerDb.pdb
+C:\OneDrive\Schule\5_Klasse\POS_SYNCED\createWebApiProject net6\NorthwindManager\NorthwindManagerDb\obj\Debug\net6.0\NorthwindManagerDb.csproj.AssemblyReference.cache
+C:\OneDrive\Schule\5_Klasse\POS_SYNCED\createWebApiProject net6\NorthwindManager\NorthwindManagerDb\obj\Debug\net6.0\NorthwindManagerDb.GeneratedMSBuildEditorConfig.editorconfig
+C:\OneDrive\Schule\5_Klasse\POS_SYNCED\createWebApiProject net6\NorthwindManager\NorthwindManagerDb\obj\Debug\net6.0\NorthwindManagerDb.AssemblyInfoInputs.cache
+C:\OneDrive\Schule\5_Klasse\POS_SYNCED\createWebApiProject net6\NorthwindManager\NorthwindManagerDb\obj\Debug\net6.0\NorthwindManagerDb.AssemblyInfo.cs
+C:\OneDrive\Schule\5_Klasse\POS_SYNCED\createWebApiProject net6\NorthwindManager\NorthwindManagerDb\obj\Debug\net6.0\NorthwindManagerDb.csproj.CoreCompileInputs.cache
+C:\OneDrive\Schule\5_Klasse\POS_SYNCED\createWebApiProject net6\NorthwindManager\NorthwindManagerDb\obj\Debug\net6.0\NorthwindManagerDb.dll
+C:\OneDrive\Schule\5_Klasse\POS_SYNCED\createWebApiProject net6\NorthwindManager\NorthwindManagerDb\obj\Debug\net6.0\ref\NorthwindManagerDb.dll
+C:\OneDrive\Schule\5_Klasse\POS_SYNCED\createWebApiProject net6\NorthwindManager\NorthwindManagerDb\obj\Debug\net6.0\NorthwindManagerDb.pdb
+C:\OneDrive\Schule\5_Klasse\POS_SYNCED\createWebApiProject net6\NorthwindManager\NorthwindManagerDb\obj\Debug\net6.0\NorthwindManagerDb.genruntimeconfig.cache
