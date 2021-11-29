@@ -14,15 +14,30 @@ namespace NorthwindManager.Controllers
         {
             this.service = service;
         }
-        [HttpGet("GetEmployees")]
+        [HttpGet("Employees")]
         public IActionResult getEmployees()
         {
             return Ok(service.GetEmployees());
         }
-        [HttpGet("GetCustomers")]
+        [HttpGet("Customers")]
         public IActionResult getCustomers()
         {
             return Ok(service.GetCustomers());
+        }
+        [HttpGet("Customers/{id}")]
+        public IActionResult getOrderForCustomer(string id)
+        {
+            return Ok(service.GetOrdersForCustomer(id));
+        }
+        [HttpGet("Employees/{id}")]
+        public IActionResult getOrderForEmployee(long id)
+        {
+            return Ok(service.GetOrdersForEmployees(id));
+        }
+        [HttpGet("OrderDetails/{id}")]
+        public IActionResult getOrderDetails(int id)
+        {
+            return Ok(service.GetOrderDetails(id));
         }
     }
 }

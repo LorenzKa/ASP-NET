@@ -20,20 +20,18 @@ namespace NorthwindManager.Services
         }
         public List<EmployeeDto> GetEmployees()
         {
-            var employees = new List<EmployeeDto>();
-            db.Employees.ToList().ForEach(x => employees.Add(new EmployeeDto()
+            return db.Employees.ToList().Select(x => new EmployeeDto()
             {
                 Name = x.FirstName + " " + x.LastName,
                 City = x.City,
                 Country = x.Country,
                 Id = x.EmployeeId
-            }));
-            return employees;
+            }).ToList();
         }
         public List<CustomerDto> GetCustomers()
         {
-            var customers = new List<CustomerDto>();
-            db.Customers.ToList().ForEach(x => customers.Add(new CustomerDto()
+            
+            return db.Customers.ToList().Select(x => new CustomerDto()
             {
                 Id = x.CustomerId,
                 City = x.City,
@@ -41,8 +39,41 @@ namespace NorthwindManager.Services
                 ContactName = x.ContactName,
                 Country = x.Country
 
-            }));
-            return customers;
+            }).ToList();
+        }
+        public List<OrderDto> GetOrdersForCustomer(string id)
+        {
+            return db.Customers.Where(x => x.CustomerId == id).Include(x => x.Orders).ThenInclude(x => x.OrderDetails).FirstOrDefault().Orders.Select(x => new OrderDto()
+            {
+
+                Id = x.OrderId,
+                NrOrderDetails = x.OrderDetails.Count,
+                OrderDate = x.OrderDate,
+                RequiredDate = x.RequiredDate,
+                ShippedDate = x.ShippedDate,
+            }).ToList();
+        }
+        public List<OrderDto> GetOrdersForEmployees(long id)
+        {
+            return db.Employees.Where(x => x.EmployeeId == id).Include(x => x.Orders).ThenInclude(x => x.OrderDetails).FirstOrDefault().Orders.Select(x => new OrderDto()
+            {
+
+                Id = x.OrderId,
+                NrOrderDetails = x.OrderDetails.Count,
+                OrderDate = x.OrderDate,
+                RequiredDate = x.RequiredDate,
+                ShippedDate = x.ShippedDate,
+            }).ToList();
+        }
+        public List<OrderDetailsDto> GetOrderDetails (int id)
+        {
+            return db.Orders.Where(x => x.OrderId == id).Include(x => x.OrderDetails).ThenInclude(x => x.Product).FirstOrDefault().OrderDetails.Select(x => new OrderDetailsDto()
+            {
+                OrderId = x.OrderId,
+                ProductName = x.Product.ProductName,
+                Quantity = x.Quantity,
+                UnitPrice = (double)x.UnitPrice
+            }).ToList();
         }
     }
 }
