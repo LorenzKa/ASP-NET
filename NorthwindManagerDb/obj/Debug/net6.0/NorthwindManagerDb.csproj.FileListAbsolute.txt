@@ -26,3 +26,5 @@ C:\OneDrive\Schule\5_Klasse\POS\ASP.NET\NorthwindManagerDb\obj\Debug\net6.0\Nort
 C:\OneDrive\Schule\5_Klasse\POS\ASP.NET\NorthwindManagerDb\obj\Debug\net6.0\ref\NorthwindManagerDb.dll
 C:\OneDrive\Schule\5_Klasse\POS\ASP.NET\NorthwindManagerDb\obj\Debug\net6.0\NorthwindManagerDb.pdb
 C:\OneDrive\Schule\5_Klasse\POS\ASP.NET\NorthwindManagerDb\obj\Debug\net6.0\NorthwindManagerDb.genruntimeconfig.cache
+C:\OneDrive\Schule\5_Klasse\POS\ASP.NET\NorthwindManagerDb\bin\Debug\net6.0\NORTHWND.MDF
+C:\OneDrive\Schule\5_Klasse\POS\ASP.NET\NorthwindManagerDb\bin\Debug\net6.0\NORTHWND_log.ldf
