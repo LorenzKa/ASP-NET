@@ -15,6 +15,6 @@ namespace PersonsDb
         public long PostalCode { get; set; }
         public string? Name { get; set; }
 
-        public virtual ICollection<Adress> Adresses { get; set; }
+        public ICollection<Adress> Adresses { get; set; }
     }
 }

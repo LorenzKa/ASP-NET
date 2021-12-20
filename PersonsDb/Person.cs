@@ -12,6 +12,6 @@ namespace PersonsDb
         public string? Tel { get; set; }
         public long AdressId { get; set; }
 
-        public virtual Adress Adress { get; set; } = null!;
+        public Adress Adress { get; set; } = null!;
     }
 }

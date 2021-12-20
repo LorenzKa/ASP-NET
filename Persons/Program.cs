@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using Persons.Services;
 
 string corsKey = "_myCorsKey";
 string swaggerVersion = "v1";
@@ -9,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // -------------------------------------------- ConfigureServices
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-
+builder.Services.AddScoped<PersonsService>();
 builder.Services.AddSwaggerGen(x =>
 {
 	x.SwaggerDoc(swaggerVersion, new OpenApiInfo
@@ -29,7 +30,7 @@ builder.Services.AddCors(options =>
 });
 
 string dataDirKey = "|DataDirectory|"; //if you use this: don't forget to set database file to "Copy if newer"
-string absoluteConnectionString = builder.Configuration.GetConnectionString("Persons");
+string absoluteConnectionString = builder.Configuration.GetConnectionString("Persons_Relative");
 string? dataDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly()?.Location);
 if (absoluteConnectionString.Contains(dataDirKey)) absoluteConnectionString = absoluteConnectionString.Replace(dataDirKey, dataDirectory + Path.DirectorySeparatorChar);
 Console.WriteLine($"******** ConnectionString: {absoluteConnectionString}");
