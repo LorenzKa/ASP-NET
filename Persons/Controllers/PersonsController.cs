@@ -22,9 +22,9 @@ namespace Persons.Controllers
             return Ok(service.allPersons());
         }
         [HttpGet("{id}")]
-        public IActionResult person(int id)
+        public IActionResult person(long id)
         {
-            return Ok(service.person(id));
+            return Ok(service.singlePerson(id));
         }
         [HttpPost]
         public IActionResult person(PersonDto person)

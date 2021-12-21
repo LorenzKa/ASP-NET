@@ -36,12 +36,12 @@ namespace Persons.Services
             }));
             return persons;
         }
-        public Person addPerson(PersonDto person)
+        public PersonDto addPerson(PersonDto person)
         {
             int adressId = 0;
-            if (db.Cities.Where(x => x.PostalCode+x.Name == person.Adress.City.PostalCode+x.Name).FirstOrDefault() != null)
+            if (db.Cities.Where(x => x.PostalCode + x.Name == person.Adress.City.PostalCode + x.Name).FirstOrDefault() != null)
             {
-                Console.WriteLine("wastrue");
+                Console.WriteLine("City exists");
                 adressId = db.Adresses.Count() + 1;
                 db.Adresses.Add(new Adress()
                 {
@@ -56,10 +56,10 @@ namespace Persons.Services
             else
             {
                 int cityid = db.Cities.Count() + 1;
-                Console.WriteLine("wasfalse");
+                Console.WriteLine("City doesnt exist");
                 db.Cities.Add(new City()
                 {
-                    Id =cityid,
+                    Id = cityid,
                     Adresses = new List<Adress>(),
                     CountryCode = person.Adress.City.CountryCode,
                     Name = person.Adress.City.Name,
@@ -79,20 +79,25 @@ namespace Persons.Services
                 Console.WriteLine("saved address");
 
             }
-            Console.WriteLine("alsdkfjöasldjkf0");
-            db.Persons.Add(new Person()
+            Console.WriteLine("Saved City and Adress");
+            var toAdd = new Person()
             {
+                
                 AdressId = adressId,
                 Born = person.Born,
                 Firstname = person.Firstname,
                 Lastname = person.Lastname,
-                Tel = person.Tel
-            });
-            
+                Tel = person.Tel,
+                 
+            };
+            db.Persons.Add(toAdd);
             db.SaveChanges();
-            return null;
+            toAdd.Adress.CityId = db.Cities.Where(x => x.PostalCode + x.Name == person.Adress.City.PostalCode + x.Name).FirstOrDefault().Id;
+            db.Persons.Update(toAdd);
+            db.SaveChanges();
+            return singlePerson(toAdd.Id);
         }
-        public PersonDto person(int id)
+        public PersonDto singlePerson(long id)
         {
             var x = db.Persons.Include(x => x.Adress).ThenInclude(x => x.City).Where(x => x.Id == id).First();
 
