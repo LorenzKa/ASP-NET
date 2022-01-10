@@ -1,4 +1,6 @@
-﻿using Persons.Dtos;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Persons.Dtos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Persons.Services
 {
@@ -82,13 +84,13 @@ namespace Persons.Services
             Console.WriteLine("Saved City and Adress");
             var toAdd = new Person()
             {
-                
+
                 AdressId = adressId,
                 Born = person.Born,
                 Firstname = person.Firstname,
                 Lastname = person.Lastname,
                 Tel = person.Tel,
-                 
+
             };
             db.Persons.Add(toAdd);
             db.SaveChanges();
@@ -122,5 +124,7 @@ namespace Persons.Services
                 }
             };
         }
+        
+
     }
 }

@@ -31,5 +31,11 @@ namespace Persons.Controllers
         {
             return Ok(service.addPerson(person));
         }
+        [HttpGet]
+        public IActionResult regex()
+        {
+
+            return Ok(Newtonsoft.Json.JsonConvert.SerializeObject(new { firstname = Regex.Firstname, lastname = Regex.Lastname, birthday = Regex.Birthday, tel = Regex.Tel, address = Regex.Address, adressStreetname = Regex.AddressStreetname, adressStreetNr = Regex.AdressStreetNr, cityCountryCode = Regex.CityCountryCode, cityPostalCode = Regex.CityPostalCode, cityStreetName = Regex.CityStreetName }));
+        }
     }
 }
