@@ -7,6 +7,10 @@ namespace TeeOnline.Services
     {
         private readonly TeeOnlineContext db;
 
+        public TeeOnlineService()
+        {
+        }
+
         public TeeOnlineService(TeeOnlineContext db)
         {
             this.db = db;
@@ -35,7 +39,6 @@ namespace TeeOnline.Services
                 },
                 Bookings = bookingDtos
             };
-
             return playerDto;
 
         }
