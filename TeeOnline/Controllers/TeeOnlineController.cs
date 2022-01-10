@@ -5,22 +5,26 @@ using TeeOnline.Services;
 
 namespace TeeOnline.Controllers
 {
-    
+    [Route("[controller]/[action]")]
     [ApiController]
     public class TeeOnlineController : ControllerBase
     {
-        TeeOnlineService service;
+        private readonly TeeOnlineService service;
 
         public TeeOnlineController(TeeOnlineService service)
         {
             this.service = service;
         }
 
-        [Route("authentication/login")]
         [HttpPost]
         public IActionResult login(LoginDto data)
         {
             return Ok( service.login(data.Email, data.Password));
+        }
+        [HttpGet]
+        public IActionResult players()
+        {
+            return Ok( service.players());
         }
     }
 }

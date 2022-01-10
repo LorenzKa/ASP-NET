@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using TeeOnline.Services;
 
 string corsKey = "_myCorsKey";
 string swaggerVersion = "v1";
@@ -34,10 +35,14 @@ string? dataDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetEntr
 if (absoluteConnectionString.Contains(dataDirKey)) absoluteConnectionString = absoluteConnectionString.Replace(dataDirKey, dataDirectory + Path.DirectorySeparatorChar);
 Console.WriteLine($"******** ConnectionString: {absoluteConnectionString}");
 builder.Services.AddDbContext<TeeOnlineContext>(options => options.UseSqlite(absoluteConnectionString));
+builder.Services.AddScoped<TeeOnlineService>();
+builder.Services.AddScoped<ReaderService>();
 // -------------------------------------------- ConfigureServices END
 
 var app = builder.Build();
-
+var scope = app.Services.CreateScope();
+var reader = scope.ServiceProvider.GetRequiredService<ReaderService>();
+reader.ReadCsv();
 // -------------------------------------------- Middleware pipeline
 if (app.Environment.IsDevelopment())
 {
