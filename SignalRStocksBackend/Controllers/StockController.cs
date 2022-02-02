@@ -38,4 +38,15 @@ public class StockController : ControllerBase
         Console.WriteLine($"StockController::Testerl");
         return "Done";
     }
+
+    [HttpGet]
+    public IActionResult GetShares()
+    {
+        return Ok(stockService.GetShares());
+    }
+    [HttpGet("{name}")]
+    public IActionResult GetUser(string name)
+    {
+        return Ok(stockService.GetUser(name));
+    }
 }

@@ -13,9 +13,20 @@ namespace SignalRStocksBackend.Hubs
         public void LoggedIn(NameDto name)
         {
             usercounter++;
-            Console.WriteLine(name.Name);
-            Clients.All.SendAsync("loggedIn", name.Name);
+            name.UserCounter = usercounter;
+            Clients.All.SendAsync("loggedIn", name);
+        }
+        public void LoggedOut(NameDto name)
+        {
+            --usercounter;
+            name.UserCounter = usercounter;
+            Clients.All.SendAsync("loggedOut", name);
         }
 
+        public override Task OnDisconnectedAsync(Exception? exception)
+        {
+            --usercounter;
+            return base.OnDisconnectedAsync(exception);
+        }
     }
 }
