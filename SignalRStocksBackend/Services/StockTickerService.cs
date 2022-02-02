@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.SignalR;
 using SignalRStocksBackend.DTOs;
 using SignalRStocksBackend.Entities;
+using SignalRStocksBackend.Hubs;
+
 // ** comment in when the Hub is ready
 // using SignalRStocksBackend.Hubs;
 
@@ -24,11 +26,12 @@ public class StockTickerService
 
     public int TickSpeed { get; set; } = 1;
 
+    private StockHub stockHub;
     // ** comment in when the Hub is ready
-    public StockTickerService(/* StockHub stockHub, */StockContext db)
+    public StockTickerService(StockHub stockHub, StockContext db)
     {
         // ** comment in when the Hub is ready
-        // this.stockHub = stockHub;
+        this.stockHub = stockHub;
         this.db = db;
         PrepareStockData();
         //PrintComparison("StockA");
@@ -111,7 +114,6 @@ public class StockTickerService
         double maxNoisePerc = MaxWhiteNoisePercent / 100;
         while (true)
         {
-            Console.WriteLine($"StockTickerService::StockTicker update stock exchange prices");
             var stocks = new List<ShareTickDto>();
             foreach (var name in splines.Keys.OrderBy(x => x))
             {
@@ -131,11 +133,11 @@ public class StockTickerService
             }
             //Console.WriteLine($"StockService::SendNewStocks via Hub: {stocks.Count} stocks");
             // ** comment in when the Hub is ready
-            /*
+            
             if (stockHub.Clients != null)
             {
-                await stockHub.Clients.All.SendAsync("newStocks", stocks);
-            }*/
+                await stockHub.Clients.All.SendAsync("stockUpdate", stocks);
+            }
             x += step;
             int delay = TickSpeed > 0 ? 2000 / TickSpeed : 2000;
             await Task.Delay(delay);

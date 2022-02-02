@@ -21,10 +21,16 @@ public class StockService
 
     public UserDto GetUser(string name)
     {
-        var user =  db.Users.Where(x => x.Name == name).FirstOrDefault();
+        var user =  db.Users.FirstOrDefault(x => x.Name == name);
         if(user != null)
         {
-            return new UserDto().CopyPropertiesFrom(user);
+            var userDto = new UserDto().CopyPropertiesFrom(user);
+            userDto.Depots = db.UserShares.Where(x => x.User.Id == user.Id).ToList().Select(x => new DepotDto()
+            {
+                Amount = x.Amount,
+                ShareName = x.Share.Name
+            }).ToList();
+            return userDto;
         }
         db.Users.Add(new User
         {
@@ -33,6 +39,6 @@ public class StockService
             Id = db.Users.Count()
         });
         db.SaveChanges();
-        return new UserDto().CopyPropertiesFrom(db.Users.Where(x => x.Name == name).First());
+        return new UserDto().CopyPropertiesFrom(db.Users.First(x => x.Name == name));
     }
 }
