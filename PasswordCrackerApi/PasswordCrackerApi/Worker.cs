@@ -14,9 +14,23 @@ namespace PasswordCrackerApi
         }
         public async Task<string> BruteforceUnit(string passwordHash, int length, char[] alphabet)
         {
-            char[] password = new string(alphabet[0], length).ToCharArray();
-            Task<string> task = Task.Run(() => recursiveMethod(passwordHash.ToUpper(), password, alphabet, 0, 1));
-            return await task;
+            List<Task<string>> tasks = new List<Task<string>>();
+            var progress = new Progress<string>();
+            progress.ProgressChanged += (_, s) => Console.WriteLine("Progress: "+s);
+            for (int i = 0; i < alphabet.Length; i++)
+            {
+                char[] password = (char.ToString(alphabet[i])+ new string(alphabet[0], length-1)).ToCharArray();
+                //Console.WriteLine(password);
+                tasks.Add(Task.Run(() => recursiveMethod(passwordHash.ToUpper(), password, alphabet, 1, 1, progress)));
+            }
+            Console.WriteLine("Started: " + tasks.Count);
+            var resultList = await Task.WhenAll(tasks);
+            var validResult = resultList.Where(x => x != null).FirstOrDefault();
+            if (validResult != null)
+            {
+                return validResult;
+            }
+            return "Password not found!";
 
         }
         public string hashPassword(string password)
@@ -34,13 +48,16 @@ namespace PasswordCrackerApi
                 return result;
             }
         }
-        public string recursiveMethod(string passwordHashToFind, char[] passwordArray, char[] alphabet, int passwordIndexToChange, int alphabetIndex)
+        public string recursiveMethod(string passwordHashToFind, char[] passwordArray, char[] alphabet, int passwordIndexToChange, int alphabetIndex, IProgress<string> progress)
         {
             //Console.WriteLine(alphabetIndex + "," + alphabet.Length + "," + passwordIndexToChange + "," + length+","+fixedPasswordIndex+","+fixedBruteforceIndex);
+            int counter = 0;
             while (true)
             {
+                //Console.WriteLine(new string(passwordArray));
+                counter++;
                 if (hashPassword(new string(passwordArray)) == passwordHashToFind) return "Password: " + new string(passwordArray);
-                if (passwordArray.Contains(alphabet.Last()) && passwordArray.Distinct().Count() == 1) return "not found";
+                if (passwordArray.Skip(1).Contains(alphabet.Last()) && passwordArray.Skip(1).Distinct().Count() == 1) return null;
                 if (alphabetIndex == alphabet.Length)
                 {
                     //Console.WriteLine("Reached a z");
@@ -53,7 +70,7 @@ namespace PasswordCrackerApi
                             //Console.WriteLine(passwordArray[offset]);
                             //Console.WriteLine("Alphabetindex: " + (Array.IndexOf(alphabet, passwordArray[offset])));
                             passwordArray[offset] = alphabet[Array.IndexOf(alphabet, passwordArray[offset]) + 1];
-                            for (int i = 0; i < offset; i++)
+                            for (int i = 1; i < offset; i++)
                             {
                                 passwordArray[i] = alphabet.First();
                             }
@@ -67,7 +84,6 @@ namespace PasswordCrackerApi
 
                 }
                 passwordArray[passwordIndexToChange] = alphabet[alphabetIndex];
-                Console.WriteLine(new string(passwordArray));
                 alphabetIndex++;
             }
         }
