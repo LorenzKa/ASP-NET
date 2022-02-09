@@ -18,7 +18,7 @@ namespace PasswordCrackerApi.Controllers
                 HashCode = "A746222F09D85605C52D4E636788D6FFDC274698B98B8C5F3244C06958683A69",
                 Length = 4
             };
-            var resultTask = worker.BruteforcePool(crackRequest);
+            var resultTask = worker.BruteforcePoolManager(crackRequest.HashCode, crackRequest.Length, crackRequest.Alphabet.ToCharArray());
             var result = await resultTask;
             return Ok(result);
         }
@@ -32,7 +32,7 @@ namespace PasswordCrackerApi.Controllers
                 HashCode = "3086E346353248775A2C5D74E36A9C9B9BD226A1EE401F830AC499633DC00031",
                 Length = 6
             };
-            var resultTask = worker.BruteforcePool(crackRequest);
+            var resultTask = worker.BruteforcePoolManager(crackRequest.HashCode, crackRequest.Length, crackRequest.Alphabet.ToCharArray());
             var result = await resultTask;
             return Ok(result);
         }
@@ -46,7 +46,7 @@ namespace PasswordCrackerApi.Controllers
                 HashCode = "26775436073E00D207E192857EE3730CFCA19DE16F01F0780096EF217C2919EF",
                 Length = 5
             };
-            var resultTask = worker.BruteforcePool(crackRequest);
+            var resultTask = worker.BruteforcePoolManager(crackRequest.HashCode, crackRequest.Length, crackRequest.Alphabet.ToCharArray());
             var result = await resultTask;
             return Ok(result);
         }

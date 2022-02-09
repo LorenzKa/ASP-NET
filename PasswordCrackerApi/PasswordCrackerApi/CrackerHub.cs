@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.SignalR;
 using PasswordCrackerApi.Dtos;
-
 namespace PasswordCrackerApi
 {
 
@@ -12,7 +11,7 @@ namespace PasswordCrackerApi
         {
             var worker = new Worker();
             
-            var resultTask = worker.BruteforcePool(crackRequest);
+            var resultTask = worker.BruteforcePoolManager(crackRequest.HashCode, crackRequest.Length, crackRequest.Alphabet.ToCharArray());
             var result = await resultTask;
             await Clients.All.SendAsync(result);
         }
