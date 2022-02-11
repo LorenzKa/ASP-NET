@@ -5,16 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PasswordCracker"
         mc:Ignorable="d"
-        Title="Password Cracker" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Password Cracker" Height="600" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <Label Margin="324,38,324,314" Name="lblHubError">Unable to connect to Hub</Label>
-        <Label Margin="35,83,675,319" RenderTransformOrigin="-1.035,0.711">Password-Hash</Label>
-        <TextBox  Margin="237,78,267,314" Name="txtPassword"></TextBox>
-        <Label Margin="35,150,693,252" Content="Alphabet" RenderTransformOrigin="-0.634,0.628"/>
-        <TextBox Margin="214,145,290,247" Name="txtAlphabet"/>
-        <Label Margin="35,217,693,185" Background="AliceBlue" Content="Length" Height="50px" Width="200px"/>
-        <TextBox Margin="214,217,290,175" Name="txtLength"/>
-        <Button Margin="355,283,355,102" RenderTransformOrigin="0.5,0.5" Click="Button_Click">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Name="lblHubError">Unable to connect to Hub</Label>
+        <Label Grid.Row="1" Grid.Column="0" Height="50px" Content="Password-Hash"></Label>
+        <TextBox  Grid.Row="1" Grid.Column="1" Width="400px" Height="50px" Name="txtPassword"></TextBox>
+        <Label Grid.Row="2" Grid.Column="0" Content="Alphabet"/>
+        <TextBox  Grid.Row="2" Grid.Column="1" Width="400px" Height="50px"  Name="txtAlphabet"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Length"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Width="400px" Height="50px" Name="txtLength"/>
+        <Button Grid.Row="4" Grid.Column="0" RenderTransformOrigin="0.5,0.5" Click="Button_Click">
             Crack Password
             <Button.RenderTransform>
                 <TransformGroup>
@@ -25,6 +36,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <ProgressBar Margin="152,352,152,35"></ProgressBar>
+        <ProgressBar Grid.Row="4" Grid.Column="2" Name="progressBar"></ProgressBar>
+        <Label Name="lblResult" Grid.Row="4" Grid.Column="2" FontSize="30px" Visibility="Hidden"></Label>
     </Grid>
 </Window>

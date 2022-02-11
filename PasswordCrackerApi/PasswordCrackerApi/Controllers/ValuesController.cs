@@ -8,7 +8,7 @@ namespace PasswordCrackerApi.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        [HttpGet]
+        /*[HttpGet]
         public async Task<IActionResult> Password0()
         {
             var worker = new Worker();
@@ -50,5 +50,6 @@ namespace PasswordCrackerApi.Controllers
             var result = await resultTask;
             return Ok(result);
         }
+        */
     }
 }

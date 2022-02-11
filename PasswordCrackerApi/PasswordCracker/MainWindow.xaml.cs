@@ -22,15 +22,25 @@ namespace PasswordCracker
     /// </summary>
     public partial class MainWindow : Window
     {
-        HubConnection connection;
+        public HubConnection connection;
         public MainWindow()
         {
             InitializeComponent();
             connection = new HubConnectionBuilder()
                 .WithUrl("https://localhost:7200/crack")
                 .Build();
-            
+            connection.On<int>("progress", progress =>
+            {
+                progressBar.Value = progress;
+            });
+            connection.On<string>("result", result =>
+            {
+                progressBar.Visibility = Visibility.Hidden;
+                lblResult.Visibility = Visibility.Visible;
+                lblResult.Content = result;
+            });
         }
+        
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             await connection.StartAsync();
@@ -43,6 +53,9 @@ namespace PasswordCracker
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            lblResult.Visibility = Visibility.Hidden;
+            progressBar.Visibility = Visibility.Visible;
+            progressBar.Value = 0;
             await connection.InvokeAsync("Bruteforce", new CrackRequestDto
             {
                 Alphabet = txtAlphabet.Text,
@@ -50,5 +63,10 @@ namespace PasswordCracker
                 Length = int.Parse(txtLength.Text)
             });
         }
+        private void ProgressBarHandler()
+        {
+            
+        }
+
     }
 }
