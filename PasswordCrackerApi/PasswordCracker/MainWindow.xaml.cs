@@ -56,6 +56,16 @@ namespace PasswordCracker
             lblResult.Visibility = Visibility.Hidden;
             progressBar.Visibility = Visibility.Visible;
             progressBar.Value = 0;
+            if(txtLength.Text == "")
+            {
+                await connection.InvokeAsync("Bruteforce", new CrackRequestDto
+                {
+                    Alphabet = txtAlphabet.Text,
+                    HashCode = txtPassword.Text,
+                    Length = 0
+                });
+                return;
+            }
             await connection.InvokeAsync("Bruteforce", new CrackRequestDto
             {
                 Alphabet = txtAlphabet.Text,
