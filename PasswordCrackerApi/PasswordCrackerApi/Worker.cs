@@ -14,12 +14,12 @@ namespace PasswordCrackerApi
             List<Task<string>> tasks = new List<Task<string>>();
             long tries = (long)(Math.Pow(alphabet.Length, length) / alphabet.Length);
             //Console.WriteLine(tries);
-            for (int i = 0; i < alphabet.Length; i++)
+            Parallel.ForEach(string.Concat(alphabet), async i =>
             {
-                char[] password = (char.ToString(alphabet[i]) + new string(alphabet[0], length - 1)).ToCharArray();
+                char[] password = (char.ToString(i) + new string(i, length - 1)).ToCharArray();
                 //Console.WriteLine(password);
-                tasks.Add(Task.Run(() => BruteforceUnit(passwordHash, password, alphabet, 1, 1, progress, tries, cancellationToken)));
-            }
+                tasks.Add(BruteforceUnit(passwordHash, password, alphabet, 1, 1, progress, tries, cancellationToken));
+            });
             Console.WriteLine("Started: " + tasks.Count);
             var resultList = await Task.WhenAll(tasks);
             var validResult = resultList.Where(x => x != null).FirstOrDefault();
@@ -27,7 +27,7 @@ namespace PasswordCrackerApi
             return "Password not found!";
 
         }
-        public string BruteforceUnit(string passwordHashToFind, char[] passwordArray, char[] alphabet, int passwordIndexToChange, int alphabetIndex, IProgress<ProgressModel> progress, long totalTries, CancellationToken cancellationToken)
+        public async Task<string> BruteforceUnit(string passwordHashToFind, char[] passwordArray, char[] alphabet, int passwordIndexToChange, int alphabetIndex, IProgress<ProgressModel> progress, long totalTries, CancellationToken cancellationToken)
         {
             //Console.WriteLine(alphabetIndex + "," + alphabet.Length + "," + passwordIndexToChange + "," + length+","+fixedPasswordIndex+","+fixedBruteforceIndex);
             long counter = 1;
@@ -40,9 +40,11 @@ namespace PasswordCrackerApi
                 if (HashPassword(new string(passwordArray)) == passwordHashToFind)
                 {
                     Console.WriteLine($"Task: {passwordArray[0]} found Password");
+                    Console.WriteLine("Password is "+new string(passwordArray));
                     progress.Report(new ProgressModel { Id = passwordArray[0], ProgressInPercent = -100 });
                     return "Password: " + new string(passwordArray);
                 }
+                Console.WriteLine(new String(passwordArray));
                 if (passwordArray.Skip(1).Contains(alphabet.Last()) && passwordArray.Skip(1).Distinct().Count() == 1)
                 {
                     progress.Report(new ProgressModel
@@ -82,11 +84,11 @@ namespace PasswordCrackerApi
                 alphabetIndex++;
             }
         }
-        public string WebCrawlerBruteforce(string passwordHash, string url, Progress<ProgressModel> progress)
+        public async Task<string> WebCrawlerBruteforce(string passwordHash, string url, Progress<ProgressModel> progress)
         {
             var html = url;
             HtmlWeb web = new HtmlWeb();
-            var htmlDoc = web.Load(html);
+            var htmlDoc =await  Task.Run(() =>  web.Load(html));
             var nodes = htmlDoc.DocumentNode.SelectNodes("/html/body/div[3]/div[3]/div[5]/div[1]/ul/li/a").Select(x => x.InnerText).ToList();
             Console.WriteLine("From Webcrawler: " + nodes.Count());
             var totalTries = nodes.Count;
@@ -103,8 +105,8 @@ namespace PasswordCrackerApi
         {
             //Console.WriteLine("Hello from ReportProgress");
             double percent = (counter / totalTries) * 100;
-            if ((int)percent % 10 != 0 || percent > 100 || lastReportedAt == (int)percent) return false;
-            //Console.WriteLine("Reported: " + id + " at " + (int)percent);
+            if (lastReportedAt == (int)percent) return false;
+            Console.WriteLine("Reported: " + id + " at " + (int)percent);
             progress.Report(new ProgressModel
             {
                 Id = id,

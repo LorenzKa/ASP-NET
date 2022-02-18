@@ -32,6 +32,8 @@ namespace PasswordCracker
             connection.On<int>("progress", progress =>
             {
                 progressBar.Value = progress;
+                lblHubError.Content = "updated at "+ DateTime.Now;
+                lblHubError.Visibility = Visibility.Visible;
             });
             connection.On<string>("result", result =>
             {
@@ -73,10 +75,5 @@ namespace PasswordCracker
                 Length = int.Parse(txtLength.Text)
             });
         }
-        private void ProgressBarHandler()
-        {
-            
-        }
-
     }
 }

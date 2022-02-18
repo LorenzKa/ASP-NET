@@ -7,7 +7,7 @@ namespace PasswordCrackerApi
     public class CrackerHub : Hub
     {
 
-        public async void Bruteforce(CrackRequestDto crackRequest)
+        public async Task Bruteforce(CrackRequestDto crackRequest)
         {
             crackRequest.HashCode = crackRequest.HashCode!.ToUpper();
             var worker = new Worker();
@@ -18,7 +18,7 @@ namespace PasswordCrackerApi
             {
                 resultTask = worker.BruteforcePoolManager(crackRequest.HashCode, crackRequest.Length, crackRequest.Alphabet!.ToCharArray(), progress, cancellationTokenSource.Token);
             }
-            else resultTask = Task.Run(() => worker.WebCrawlerBruteforce(crackRequest.HashCode, "https://de.wikipedia.org/wiki/Liste_von_Fabelwesen", progress));
+            else resultTask = worker.WebCrawlerBruteforce(crackRequest.HashCode, "https://de.wikipedia.org/wiki/Liste_von_Fabelwesen", progress);
             var progressMap = new Dictionary<string, int>();
             var watch = new System.Diagnostics.Stopwatch();
             watch.Start();
