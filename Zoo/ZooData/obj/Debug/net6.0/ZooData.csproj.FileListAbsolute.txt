@@ -1,0 +1,12 @@
+C:\Users\loren\source\repos\LorenzKa\ASP.NET\Zoo\ZooData\bin\Debug\net6.0\ZooData.deps.json
+C:\Users\loren\source\repos\LorenzKa\ASP.NET\Zoo\ZooData\bin\Debug\net6.0\ZooData.dll
+C:\Users\loren\source\repos\LorenzKa\ASP.NET\Zoo\ZooData\bin\Debug\net6.0\ref\ZooData.dll
+C:\Users\loren\source\repos\LorenzKa\ASP.NET\Zoo\ZooData\bin\Debug\net6.0\ZooData.pdb
+C:\Users\loren\source\repos\LorenzKa\ASP.NET\Zoo\ZooData\obj\Debug\net6.0\ZooData.csproj.AssemblyReference.cache
+C:\Users\loren\source\repos\LorenzKa\ASP.NET\Zoo\ZooData\obj\Debug\net6.0\ZooData.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\loren\source\repos\LorenzKa\ASP.NET\Zoo\ZooData\obj\Debug\net6.0\ZooData.AssemblyInfoInputs.cache
+C:\Users\loren\source\repos\LorenzKa\ASP.NET\Zoo\ZooData\obj\Debug\net6.0\ZooData.AssemblyInfo.cs
+C:\Users\loren\source\repos\LorenzKa\ASP.NET\Zoo\ZooData\obj\Debug\net6.0\ZooData.csproj.CoreCompileInputs.cache
+C:\Users\loren\source\repos\LorenzKa\ASP.NET\Zoo\ZooData\obj\Debug\net6.0\ZooData.dll
+C:\Users\loren\source\repos\LorenzKa\ASP.NET\Zoo\ZooData\obj\Debug\net6.0\ref\ZooData.dll
+C:\Users\loren\source\repos\LorenzKa\ASP.NET\Zoo\ZooData\obj\Debug\net6.0\ZooData.pdb

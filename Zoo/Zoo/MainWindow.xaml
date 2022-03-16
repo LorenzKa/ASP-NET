@@ -1,0 +1,31 @@
+﻿<Window x:Class="Zoo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zoo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="542" Width="430">
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0">Verfügbare Spezies</Label>
+        <ComboBox Name="cmbAnimals" Grid.Row="0" Width="150px"></ComboBox>
+        <TextBox Name="txtCount" Grid.Row="0" Width="40px" Margin="306,0,84,0"></TextBox>
+        <Button Name="btnBuy" Grid.Row="0" Width="50px" Margin="362,0,18,0" Click="btnBuy_Click">Kaufen</Button>
+        <Label Name="lblZooName" Grid.Row="1">Zoo dei muada</Label>
+        <Label Name="lblGreenfood" Grid.Row="2" >Salodfuade</Label>
+        <Label Name="lblMeat" Grid.Row="3" >Fleischfuada</Label>
+        <Label Name="lblTotal" Grid.Row="4" >Wert</Label>
+        <ListView Name="lstAnimals" Grid.Row="5"></ListView>
+    </Grid>
+
+</Window>

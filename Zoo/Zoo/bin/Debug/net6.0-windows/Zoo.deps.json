@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Zoo/1.0.0": {
+        "dependencies": {
+          "ZooData": "1.0.0"
+        },
+        "runtime": {
+          "Zoo.dll": {}
+        }
+      },
+      "ZooData/1.0.0": {
+        "runtime": {
+          "ZooData.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Zoo/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ZooData/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
