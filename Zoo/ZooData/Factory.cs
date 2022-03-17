@@ -8,17 +8,34 @@ using Zoo;
 
 namespace ZooData
 {
-    public class Factory
+    public sealed class Factory
     {
-        public Dictionary<string, Animal> animals = new();
-        public Factory()
+        private static Factory instance = null;
+        private static readonly object padlock = new object();
+
+        public Dictionary<string, Animal> Spezies { get; }
+        public static Factory Instance
         {
-            animals = GetDictonaryOfType<Animal>();
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new Factory();
+                    }
+                    return instance;
+                }
+            }
+        }
+        Factory()
+        {
+            Spezies = GetDictonaryOfType<Animal>();
         }
 
         public Animal GetAnimal(string animal)
         {
-            return animals.GetValueOrDefault(animal)!;
+            return Spezies.GetValueOrDefault(animal)!;
         }
 
         public Dictionary<string, T> GetDictonaryOfType<T>(params object[] constructorArgs) where T : class
@@ -27,12 +44,12 @@ namespace ZooData
                 .GetTypes()
                 .Where(type => type.IsClass && !type.IsAbstract && type.IsSubclassOf(typeof(T)))
                 .Select(type => (T)Activator.CreateInstance(type, constructorArgs))
-                .ToDictionary(x => x.GetType().FullName);
+                .ToDictionary(x => x.GetType().Name);
         }
 
-        public Animal cloneAnimal(Animal animal)
+        public Animal FactoryMethod(string animal)
         {
-            throw new NotImplementedException();
+            return Spezies[animal];
         }
     }
 }

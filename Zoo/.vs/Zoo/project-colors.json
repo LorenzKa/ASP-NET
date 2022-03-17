@@ -5,7 +5,12 @@
       "ProjectGuid": "5e6c29ab-4ac4-4073-b507-05cd57896f44",
       "DisplayName": "Zoo",
       "ColorIndex": 0
+    },
+    "97dd70da-167f-44ac-a1b3-fd98bba68594": {
+      "ProjectGuid": "97dd70da-167f-44ac-a1b3-fd98bba68594",
+      "DisplayName": "ZooData",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }

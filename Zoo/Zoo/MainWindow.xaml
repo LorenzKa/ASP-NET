@@ -21,7 +21,7 @@
         <ComboBox Name="cmbAnimals" Grid.Row="0" Width="150px"></ComboBox>
         <TextBox Name="txtCount" Grid.Row="0" Width="40px" Margin="306,0,84,0"></TextBox>
         <Button Name="btnBuy" Grid.Row="0" Width="50px" Margin="362,0,18,0" Click="btnBuy_Click">Kaufen</Button>
-        <Label Name="lblZooName" Grid.Row="1">Zoo dei muada</Label>
+        <Label Name="lblZooName" Grid.Row="1">Zoo</Label>
         <Label Name="lblGreenfood" Grid.Row="2" >Salodfuade</Label>
         <Label Name="lblMeat" Grid.Row="3" >Fleischfuada</Label>
         <Label Name="lblTotal" Grid.Row="4" >Wert</Label>

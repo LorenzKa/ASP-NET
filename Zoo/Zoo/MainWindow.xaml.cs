@@ -22,19 +22,33 @@ namespace Zoo
     public partial class MainWindow : Window
     {
         List<Animal> animals = new List<Animal>();
-        Factory factory = new Factory();
+        Factory factory = Factory.Instance;
         public MainWindow()
         {
             InitializeComponent();
-            cmbAnimals.ItemsSource = factory.animals.Values.Select(x => x.Name);
+            cmbAnimals.ItemsSource = factory.Spezies.Values.Select(x => x.Name);
         }
 
         private void btnBuy_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < int.Parse(txtCount.Text); i++)
             {
-                animals.Add(factory.cloneAnimal((Animal)cmbAnimals.SelectedValue));
+                animals.Add(factory.FactoryMethod((string)cmbAnimals.SelectedValue));
             }
+            updateData();
+        }
+
+        private void updateData()
+        {
+            lblGreenfood.Content = "Bedarf Grünfutter/Tag [kg]: "+ animals.Select(x => x.GreenfoodUsage).Sum();
+            lblMeat.Content = "Bedarf Fleischfutter/Tag [kg]: " + animals.Select(x => x.MeatUsage).Sum();
+            lblTotal.Content = "Gesamtwert [€]: " + animals.Select(x => x.Price).Sum();
+            var animalCounterList = new List<string>();
+            foreach(Animal animal in animals.DistinctBy(x => x.Name).ToList())
+            {
+                animalCounterList.Add(animals.Where(x => x.Name == animal.Name).Count()+"x "+animal.Name);
+            }
+            lstAnimals.ItemsSource = animalCounterList;
         }
     }
 }

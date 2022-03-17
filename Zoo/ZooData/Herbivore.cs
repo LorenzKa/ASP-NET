@@ -8,6 +8,6 @@ namespace Zoo
 {
     public abstract class Herbivore : Animal
     {
-        public abstract double MeatUsage { get; set; }
+        public override double GreenfoodUsage { get; set; } = 0;
     }
 }
