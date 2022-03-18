@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\loren\\source\\repos\\LorenzKa\\ASP.NET\\Zoo\\ZooData\\ZooData.csproj": {}
+    "C:\\Users\\loren\\Source\\Repos\\LorenzKa\\ASP.NET\\Zoo\\ZooData\\ZooData.csproj": {}
   },
   "projects": {
-    "C:\\Users\\loren\\source\\repos\\LorenzKa\\ASP.NET\\Zoo\\ZooData\\ZooData.csproj": {
+    "C:\\Users\\loren\\Source\\Repos\\LorenzKa\\ASP.NET\\Zoo\\ZooData\\ZooData.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\loren\\source\\repos\\LorenzKa\\ASP.NET\\Zoo\\ZooData\\ZooData.csproj",
+        "projectUniqueName": "C:\\Users\\loren\\Source\\Repos\\LorenzKa\\ASP.NET\\Zoo\\ZooData\\ZooData.csproj",
         "projectName": "ZooData",
-        "projectPath": "C:\\Users\\loren\\source\\repos\\LorenzKa\\ASP.NET\\Zoo\\ZooData\\ZooData.csproj",
+        "projectPath": "C:\\Users\\loren\\Source\\Repos\\LorenzKa\\ASP.NET\\Zoo\\ZooData\\ZooData.csproj",
         "packagesPath": "C:\\Users\\loren\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\loren\\source\\repos\\LorenzKa\\ASP.NET\\Zoo\\ZooData\\obj\\",
+        "outputPath": "C:\\Users\\loren\\Source\\Repos\\LorenzKa\\ASP.NET\\Zoo\\ZooData\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\loren\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -54,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

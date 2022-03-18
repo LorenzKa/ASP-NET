@@ -13,7 +13,7 @@ namespace ZooData
         private static Factory instance = null;
         private static readonly object padlock = new object();
 
-        public Dictionary<string, Animal> Spezies { get; }
+        public Dictionary<string, BaseAnimal> Spezies { get; }
         public static Factory Instance
         {
             get
@@ -30,10 +30,10 @@ namespace ZooData
         }
         Factory()
         {
-            Spezies = GetDictonaryOfType<Animal>();
+            Spezies = GetDictonaryOfType<BaseAnimal>();
         }
 
-        public Animal GetAnimal(string animal)
+        public BaseAnimal GetAnimal(string animal)
         {
             return Spezies.GetValueOrDefault(animal)!;
         }
@@ -47,9 +47,11 @@ namespace ZooData
                 .ToDictionary(x => x.GetType().Name);
         }
 
-        public Animal FactoryMethod(string animal)
+        public BaseAnimal FactoryMethod(string animal)
         {
-            return Spezies[animal];
+            if (!Spezies.ContainsKey(animal)) throw new NotImplementedException();
+            return Spezies[animal].DeepClone();
         }
+        
     }
 }

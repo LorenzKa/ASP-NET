@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zoo
 {
+    [Serializable]
     public class Elefant : Carnivore
     {
         

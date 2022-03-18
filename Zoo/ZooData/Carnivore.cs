@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Zoo
 {
-    public abstract class Carnivore : Animal
+    [Serializable]
+    public abstract class Carnivore : BaseAnimal
     {
-        public override double MeatUsage { get; set; } = 0.0;
+
+        public abstract double GreenfoodUsage { get; set; }
+
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zoo
 {
+    [Serializable]
     public class Löwe : Herbivore
     {
         public override string? Name { get; set; } = "Löwe";
