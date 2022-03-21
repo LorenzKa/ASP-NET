@@ -1,0 +1,61 @@
+﻿<Window x:Class="ShoppingCart.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShoppingCart"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="Shopping Cart" Height="500" Width="700">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Name" Grid.Row="0"/>
+            <Label Content="PricePerUnit" Grid.Row="1"/>
+            <Label Content="Unit" Grid.Row="2"/>
+            <Label Content="Weight" Grid.Row="3"/>
+            <TextBox Name="txtName" Text="xxx" Grid.Row="0" Grid.Column="1"/>
+            <TextBox Name="txtPricePerUnit" Text="5.90" Grid.Row="1" Grid.Column="1"/>
+            <Slider Name="sldUnits" Grid.Row="2" Grid.Column="1" Minimum="1" Maximum="10" Value="3"/>
+            <Slider Name="sldWeight" Grid.Row="3" Grid.Column="1" Minimum="1" Maximum="500" Value="50"/>
+            <GroupBox Header="Target" Grid.Row="4" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Vertical">
+                    <RadioButton Name="rdoCart" Content="Einkaufswagen" IsChecked="True" />
+                    <RadioButton Name="rdoBag" Content="Einkaufskorb"  />
+                </StackPanel>
+            </GroupBox>
+            <StackPanel Name="panButtons" Grid.Row="5" Grid.ColumnSpan="2"
+                  Button.Click="panButtons_Click"/>
+
+        </Grid>
+        <StackPanel Grid.Column="1">
+            <Button Content="Hinzufügen" Click="btnAdd" />
+            <Label Content="Kategorien"/>
+            <StackPanel Name="panCategories" Orientation="Vertical" />
+        </StackPanel>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ListBox Name="lstCart" Grid.Row="0" />
+            <ListBox Name="lstBag" Grid.Row="1" />
+        </Grid>
+    </Grid>
+</Window>
