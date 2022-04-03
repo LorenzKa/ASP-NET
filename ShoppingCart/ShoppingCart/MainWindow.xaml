@@ -41,13 +41,26 @@
                 </StackPanel>
             </GroupBox>
             <StackPanel Name="panButtons" Grid.Row="5" Grid.ColumnSpan="2"
-                  Button.Click="panButtons_Click"/>
+                  Button.Click="panButtons_Click">
+                <Button Name="btnAlc" Click="btnAlc_Click">Alk</Button>
+                <Button Name="btnCalories" Click="btnCalories_Click">Kalorien</Button>
+                <Button Name="btnRegister" Click="btnRegister_Click">Kasse</Button>
+                <Button Name="btnRenderHtml" Click="btnRenderHtml_Click">Render HTML</Button>
+                <Button Name="btnScale" Click="btnScale_Click">Waage</Button>
+                <TextBox TextWrapping="Wrap" Name="lblResult" Height="223" IsReadOnly="True" Background="Transparent" BorderThickness="0"></TextBox>
+                
+            </StackPanel>
 
         </Grid>
         <StackPanel Grid.Column="1">
             <Button Content="Hinzufügen" Click="btnAdd" />
             <Label Content="Kategorien"/>
-            <StackPanel Name="panCategories" Orientation="Vertical" />
+            <StackPanel Name="panCategories" Orientation="Vertical">
+                <RadioButton Name="rdoBeverage" Content="Beverage" IsChecked="true"></RadioButton>
+                <RadioButton Name="rdoCosmetic" Content="Cosmetic"></RadioButton>
+                <RadioButton Name="rdoFood" Content="Food"></RadioButton>
+            </StackPanel>
+            
         </StackPanel>
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>

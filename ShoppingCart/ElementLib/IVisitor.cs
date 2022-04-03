@@ -6,7 +6,7 @@
     void VisitBeverage(Beverage beverage);
     void VisitCosmetic(Cosmetic cosmetic);
     string ResultString { get; }
-    IVisitor Reset();
+    void Reset();
   }
 }
 
