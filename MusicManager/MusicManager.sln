@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicManager", "MusicManager\MusicManager.csproj", "{162B2A72-7D2D-42C3-BBBD-C241EABD8392}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicManagerDb", "MusicManagerDb\MusicManagerDb.csproj", "{47E2D28E-5DFF-47A9-B9B6-6C18CA90DCB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{162B2A72-7D2D-42C3-BBBD-C241EABD8392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{162B2A72-7D2D-42C3-BBBD-C241EABD8392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{162B2A72-7D2D-42C3-BBBD-C241EABD8392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{162B2A72-7D2D-42C3-BBBD-C241EABD8392}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47E2D28E-5DFF-47A9-B9B6-6C18CA90DCB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47E2D28E-5DFF-47A9-B9B6-6C18CA90DCB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47E2D28E-5DFF-47A9-B9B6-6C18CA90DCB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47E2D28E-5DFF-47A9-B9B6-6C18CA90DCB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A3EBD453-B070-4358-AD59-A353AFAED76F}
+	EndGlobalSection
+EndGlobal

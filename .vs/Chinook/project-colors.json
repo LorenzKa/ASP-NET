@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "0f3e28e5-b215-4ad5-909f-0a85ad6fc592": {
+      "ProjectGuid": "0f3e28e5-b215-4ad5-909f-0a85ad6fc592",
+      "DisplayName": "WpfApp1",
+      "ColorIndex": 0
+    },
+    "c4f904db-9bb8-45b2-b65b-06a958db7d83": {
+      "ProjectGuid": "c4f904db-9bb8-45b2-b65b-06a958db7d83",
+      "DisplayName": "ChinookDb",
+      "ColorIndex": 1
+    },
+    "def62be7-495d-424d-a797-06fa4104d2b3": {
+      "ProjectGuid": "def62be7-495d-424d-a797-06fa4104d2b3",
+      "DisplayName": "MvvmTools",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}
