@@ -20,7 +20,22 @@
       "ProjectGuid": "25edd6ae-4d01-4294-8da7-ea318201c27d",
       "DisplayName": "MusikDb",
       "ColorIndex": 2
+    },
+    "4d008577-e383-4c6c-a54a-5386a9c374ba": {
+      "ProjectGuid": "4d008577-e383-4c6c-a54a-5386a9c374ba",
+      "DisplayName": "MusikDb",
+      "ColorIndex": 3
+    },
+    "47e2d28e-5dff-47a9-b9b6-6c18ca90dcb6": {
+      "ProjectGuid": "47e2d28e-5dff-47a9-b9b6-6c18ca90dcb6",
+      "DisplayName": "MusicManagerDb",
+      "ColorIndex": 4
+    },
+    "3631bbf4-71ae-45de-b657-4dc919f4c4e4": {
+      "ProjectGuid": "3631bbf4-71ae-45de-b657-4dc919f4c4e4",
+      "DisplayName": "MvvmTools",
+      "ColorIndex": 5
     }
   },
-  "NextColorIndex": 3
+  "NextColorIndex": 6
 }

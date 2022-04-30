@@ -22,21 +22,23 @@ namespace MusicManager
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            db.Database.Migrate();
+            var p = new Person.PersonBuilder("Max", "Mustermann").Age(15).Build();
+            var sing = Singleton.Instance;
+            var sing2 = Singleton.Instance;
+            if(sing == sing2)
+            {
+                Console.WriteLine("asdlknfhjkasödf");
+            }
+            db.Database.EnsureCreated();
             if (db.Artists.Count() > 0) return Task.CompletedTask;
 
             File.ReadAllLines("musicDbData.csv").Skip(1).ToList().ForEach(x =>
             {
                 var splitted = x.Split(";");
-                var artistId = db.Artists.Count();
-                var recordTypeId = db.RecordTypes.Count();
-                var recordId = db.RecordTypes.Count();
-                var songId = db.Songs.Count();
                 if (db.Artists.Where(x => x.ArtistName == splitted[0]).Count() == 0)
                 {
                     db.Artists.Add(new Artist
                     {
-                        ArtistId = artistId,
                         ArtistName = splitted[0]
                     });
                     db.SaveChanges();
@@ -45,7 +47,6 @@ namespace MusicManager
                 {
                     db.RecordTypes.Add(new RecordType
                     {
-                        TypeId = recordTypeId,
                         Descr = splitted[2]
                     });
                 }
@@ -54,22 +55,20 @@ namespace MusicManager
                 {
                     db.Records.Add(new Record
                     {
-                        RecordId = recordId,
                         RecordTitle = splitted[1],
                         Year = int.Parse(splitted[3]),
-                        ArtistId = artistId,
-                        RecordTypeId = recordTypeId
-                    });
+                        ArtistId = db.Artists.Where(x => x.ArtistName == splitted[0]).First().ArtistId,
+                        RecordTypeId = db.RecordTypes.Where(x => x.Descr == splitted[2]).First().TypeId
+                    }); ;
                 }
                 db.SaveChanges();
                 if (db.Songs.Where(x => x.SongTitle == splitted[4]).Count() == 0)
                 {
                     db.Songs.Add(new Song
                     {
-                        SongId = songId,
                         SongTitle = splitted[4],
                         TrackNo = db.Songs.Where(x => x.Record.RecordTitle == splitted[2]).Count(),
-                        RecordId = recordId
+                        RecordId = db.Records.Where(x => x.RecordTitle == splitted[1]).First().RecordId,
 
                     });
                 }

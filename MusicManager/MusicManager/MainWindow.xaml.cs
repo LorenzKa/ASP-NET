@@ -29,6 +29,8 @@ namespace MusicManager
             
             InitializeComponent();
             this.db = db;
+            MusicViewModel viewmodel = new MusicViewModel(db);
+            this.DataContext = viewmodel;
             db.Database.EnsureCreated();
             
         }

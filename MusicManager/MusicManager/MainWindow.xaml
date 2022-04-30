@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:MusicManager"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MusicViewModel></local:MusicViewModel>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -17,13 +20,40 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <ComboBox Width="100px" HorizontalAlignment="Left"></ComboBox>
-        <Button Width="50px" HorizontalAlignment="Right">Interpret ändern</Button>
-        <Label Grid.Column="1">Nr Interpreten</Label>
-        <Label Grid.Column="2">Artist 2</Label>
-        <DataGrid Grid.Row="1"></DataGrid>
-        <DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"></DataGrid>
-        <TreeView Grid.Column="2" Grid.Row="1" Grid.RowSpan="2"></TreeView>
-        <ListView Grid.Row="2"></ListView>
+        <ComboBox Name="cmbArtist" Width="100px" HorizontalAlignment="Left" ItemsSource="{Binding Artists}"  DisplayMemberPath="ArtistName" SelectedItem="{Binding SelectedArtist}"></ComboBox>
+        <Button Name="btnChangeArtist" Width="50px" HorizontalAlignment="Right">Interpret ändern</Button>
+        <Label Name="lblArtists" Grid.Column="1" Content="{Binding ArtistCount}"></Label>
+        <Label Name="lblArtistId" Grid.Column="2" Content="{Binding SelectedArtist.ArtistId}"></Label>
+        <DataGrid Name="dtgAlbums" Grid.Row="1" ItemsSource="{Binding Records}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedRecord}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Jahr" Binding="{Binding Year}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Titel" Binding="{Binding RecordTitle}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Typ" Binding="{Binding RecordType.Descr}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Id" Binding="{Binding RecordId}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Name="dtgSongs" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Songs}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="#" Binding="{Binding TrackNo}"></DataGridTextColumn>
+                <DataGridTextColumn Header="#" Binding="{Binding SongTitle}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TreeView Name="trvArtists" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" ItemsSource="{Binding Artists}" >
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Records}">
+                    <Label Content="{Binding ArtistName}"></Label>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Songs}">
+                            <Label Content="{Binding RecordTitle}"></Label>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <HierarchicalDataTemplate>
+                                    <Label Content="{Binding SongTitle}"></Label></HierarchicalDataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <ListView Name="lstArtists" Grid.Row="2" ItemsSource="{Binding Artists}" DisplayMemberPath="ArtistName"></ListView>
     </Grid>
 </Window>
